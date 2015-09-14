@@ -1,0 +1,228 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/images/welcome.jpg</file>
+        <file>res/images/accept_page.png</file>
+        <file>res/images/accept.png</file>
+        <file>res/images/Add Green Button.png</file>
+        <file>res/images/Add To Favorite.png</file>
+        <file>res/images/add_page.png</file>
+        <file>res/images/add_to_folder.png</file>
+        <file>res/images/add.png</file>
+        <file>res/images/analyze.png</file>
+        <file>res/images/attachment.png</file>
+        <file>res/images/back.png</file>
+        <file>res/images/block.png</file>
+        <file>res/images/Blue Ball.png</file>
+        <file>res/images/calendar_empty.png</file>
+        <file>res/images/calendar.png</file>
+        <file>res/images/chart_pie.png</file>
+        <file>res/images/chart.png</file>
+        <file>res/images/Clear Green Button.png</file>
+        <file>res/images/clock.png</file>
+        <file>res/images/config.png</file>
+        <file>res/images/delete_folder.png</file>
+        <file>res/images/delete_page.png</file>
+        <file>res/images/delete.png</file>
+        <file>res/images/Document.png</file>
+        <file>res/images/download.png</file>
+        <file>res/images/favorite.png</file>
+        <file>res/images/Finder.png</file>
+        <file>res/images/folder_accept.png</file>
+        <file>res/images/folder_full.png</file>
+        <file>res/images/folder.png</file>
+        <file>res/images/Forward Mail.png</file>
+        <file>res/images/full_page.png</file>
+        <file>res/images/Gear Alt.png</file>
+        <file>res/images/Gear.png</file>
+        <file>res/images/Green Ball.png</file>
+        <file>res/images/Grey Ball.png</file>
+        <file>res/images/help.png</file>
+        <file>res/images/History.png</file>
+        <file>res/images/home.png</file>
+        <file>res/images/info.png</file>
+        <file>res/images/Internet History.png</file>
+        <file>res/images/lock.png</file>
+        <file>res/images/logo.png</file>
+        <file>res/images/mail_lock.png</file>
+        <file>res/images/mail_receive.png</file>
+        <file>res/images/mail_search.png</file>
+        <file>res/images/mail_send.png</file>
+        <file>res/images/mail.png</file>
+        <file>res/images/Menu Item.png</file>
+        <file>res/images/Menu.png</file>
+        <file>res/images/New Document.png</file>
+        <file>res/images/New Mail.png</file>
+        <file>res/images/new_page.png</file>
+        <file>res/images/next.png</file>
+        <file>res/images/Orange Ball.png</file>
+        <file>res/images/page_process.png</file>
+        <file>res/images/process.png</file>
+        <file>res/images/promotion.png</file>
+        <file>res/images/protection.png</file>
+        <file>res/images/Purple Ball.png</file>
+        <file>res/images/query.png</file>
+        <file>res/images/Red Ball.png</file>
+        <file>res/images/refresh.png</file>
+        <file>res/images/rss.png</file>
+        <file>res/images/save_32.png</file>
+        <file>res/images/screen_32.png</file>
+        <file>res/images/search_chart_32.png</file>
+        <file>res/images/search_page.png</file>
+        <file>res/images/Send Document.png</file>
+        <file>res/images/Send Mail.png</file>
+        <file>res/images/tag_blue.png</file>
+        <file>res/images/tag_green.png</file>
+        <file>res/images/Terminal.png</file>
+        <file>res/images/text_page.png</file>
+        <file>res/images/Transfer Document.png</file>
+        <file>res/images/Transfer.png</file>
+        <file>res/images/Universal Binary.png</file>
+        <file>res/images/unlock.png</file>
+        <file>res/images/update.png</file>
+        <file>res/images/user.png</file>
+        <file>res/images/users.png</file>
+        <file>res/images/warning.png</file>
+        <file>res/images/Web Browser.png</file>
+        <file>res/images/world.png</file>
+        <file>res/images/Yellow Ball.png</file>
+        <file>res/images/PCServer.png</file>
+        <file>res/language/qt_zh_CN.qm</file>
+        <file>res/language/qt_zh_CN.ts</file>
+        <file>res/images/256/add.png</file>
+        <file>res/images/256/admin.png</file>
+        <file>res/images/256/aim.png</file>
+        <file>res/images/256/alarm.png</file>
+        <file>res/images/256/antenna.png</file>
+        <file>res/images/256/antenna2.png</file>
+        <file>res/images/256/apache_server.png</file>
+        <file>res/images/256/attachment.png</file>
+        <file>res/images/256/bill.png</file>
+        <file>res/images/256/bills.png</file>
+        <file>res/images/256/binoculars.png</file>
+        <file>res/images/256/bomb.png</file>
+        <file>res/images/256/book.png</file>
+        <file>res/images/256/box.png</file>
+        <file>res/images/256/boxes.png</file>
+        <file>res/images/256/briefcase.png</file>
+        <file>res/images/256/brush.png</file>
+        <file>res/images/256/brushes.png</file>
+        <file>res/images/256/calendar.png</file>
+        <file>res/images/256/camera.png</file>
+        <file>res/images/256/cancel.png</file>
+        <file>res/images/256/certificate.png</file>
+        <file>res/images/256/checkmark.png</file>
+        <file>res/images/256/clipboard.png</file>
+        <file>res/images/256/clock.png</file>
+        <file>res/images/256/close.png</file>
+        <file>res/images/256/cloud.png</file>
+        <file>res/images/256/coins.png</file>
+        <file>res/images/256/companies.png</file>
+        <file>res/images/256/company.png</file>
+        <file>res/images/256/connect_vertical.png</file>
+        <file>res/images/256/connect.png</file>
+        <file>res/images/256/copy2.png</file>
+        <file>res/images/256/cross.png</file>
+        <file>res/images/256/curriculum.png</file>
+        <file>res/images/256/disconnect_vertical.png</file>
+        <file>res/images/256/disconnect.png</file>
+        <file>res/images/256/diskette.png</file>
+        <file>res/images/256/document.png</file>
+        <file>res/images/256/documents.png</file>
+        <file>res/images/256/down.png</file>
+        <file>res/images/256/download.png</file>
+        <file>res/images/256/file_format_aiff.png</file>
+        <file>res/images/256/file_format_au.png</file>
+        <file>res/images/256/file_format_avi.png</file>
+        <file>res/images/256/file_format_cda.png</file>
+        <file>res/images/256/file_format_divx.png</file>
+        <file>res/images/256/file_format_dvd.png</file>
+        <file>res/images/256/file_format_vox.png</file>
+        <file>res/images/256/file_format_wma.png</file>
+        <file>res/images/256/file_format_wmv.png</file>
+        <file>res/images/256/file_type_audio.png</file>
+        <file>res/images/256/file_type_video.png</file>
+        <file>res/images/256/files_format_aiff.png</file>
+        <file>res/images/256/files_format_au.png</file>
+        <file>res/images/256/files_format_avi.png</file>
+        <file>res/images/256/files_format_cda.png</file>
+        <file>res/images/256/files_format_divx.png</file>
+        <file>res/images/256/files_format_dvd.png</file>
+        <file>res/images/256/files_format_vox.png</file>
+        <file>res/images/256/files_format_wma.png</file>
+        <file>res/images/256/files_format_wmv.png</file>
+        <file>res/images/256/files_type_audio.png</file>
+        <file>res/images/256/files_type_video.png</file>
+        <file>res/images/256/film_reel.png</file>
+        <file>res/images/256/folder2.png</file>
+        <file>res/images/256/front_desk.png</file>
+        <file>res/images/256/games_control.png</file>
+        <file>res/images/256/gear.png</file>
+        <file>res/images/256/hamburguer.png</file>
+        <file>res/images/256/hammer.png</file>
+        <file>res/images/256/heart.png</file>
+        <file>res/images/256/help.png</file>
+        <file>res/images/256/home.png</file>
+        <file>res/images/256/hourglass.png</file>
+        <file>res/images/256/image.png</file>
+        <file>res/images/256/info.png</file>
+        <file>res/images/256/ipod.png</file>
+        <file>res/images/256/key.png</file>
+        <file>res/images/256/left.png</file>
+        <file>res/images/256/ligthbulb_off.png</file>
+        <file>res/images/256/ligthbulb_on.png</file>
+        <file>res/images/256/link.png</file>
+        <file>res/images/256/location.png</file>
+        <file>res/images/256/lock_open.png</file>
+        <file>res/images/256/lock.png</file>
+        <file>res/images/256/management.png</file>
+        <file>res/images/256/microphone.png</file>
+        <file>res/images/256/money_bag.png</file>
+        <file>res/images/256/monitor.png</file>
+        <file>res/images/256/music_saxophone.png</file>
+        <file>res/images/256/next.png</file>
+        <file>res/images/256/open_folder.png</file>
+        <file>res/images/256/password.png</file>
+        <file>res/images/256/pen_drive.png</file>
+        <file>res/images/256/pencil.png</file>
+        <file>res/images/256/phone.png</file>
+        <file>res/images/256/physics_magnet.png</file>
+        <file>res/images/256/piggy_bank.png</file>
+        <file>res/images/256/plastic_bottle.png</file>
+        <file>res/images/256/previous.png</file>
+        <file>res/images/256/print.png</file>
+        <file>res/images/256/push_pin.png</file>
+        <file>res/images/256/pyramid.png</file>
+        <file>res/images/256/radio_microphone.png</file>
+        <file>res/images/256/refresh.png</file>
+        <file>res/images/256/reload.png</file>
+        <file>res/images/256/ribbon.png</file>
+        <file>res/images/256/right.png</file>
+        <file>res/images/256/ringtone.png</file>
+        <file>res/images/256/safety_box.png</file>
+        <file>res/images/256/scissors.png</file>
+        <file>res/images/256/server.png</file>
+        <file>res/images/256/shield.png</file>
+        <file>res/images/256/shoping_cart.png</file>
+        <file>res/images/256/shopping_basket.png</file>
+        <file>res/images/256/shopping_cart.png</file>
+        <file>res/images/256/slot_machine.png</file>
+        <file>res/images/256/smiley.png</file>
+        <file>res/images/256/speech_bubble.png</file>
+        <file>res/images/256/star.png</file>
+        <file>res/images/256/teachers_day.png</file>
+        <file>res/images/256/technical_wrench.png</file>
+        <file>res/images/256/treasure_chest.png</file>
+        <file>res/images/256/trojan.png</file>
+        <file>res/images/256/trojan2.png</file>
+        <file>res/images/256/trophy.png</file>
+        <file>res/images/256/up.png</file>
+        <file>res/images/256/user.png</file>
+        <file>res/images/256/virus.png</file>
+        <file>res/images/256/webcam.png</file>
+        <file>res/images/256/weight.png</file>
+        <file>res/images/256/world.png</file>
+        <file>res/images/256/zoom_in.png</file>
+        <file>res/images/256/zoom_out.png</file>
+        <file>res/images/256/zoom.png</file>
+    </qresource>
+</RCC>

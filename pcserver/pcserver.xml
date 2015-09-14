@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PCServer>
+ <ServerInfo>
+  <LISTENPORT>6010</LISTENPORT>
+ </ServerInfo>
+</PCServer>
