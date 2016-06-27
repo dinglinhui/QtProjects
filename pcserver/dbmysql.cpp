@@ -22,10 +22,10 @@ bool DbMySQL::connectMySQL()
     db.setHostName("127.0.0.1");
     db.setDatabaseName("db_pcserver");
     db.setUserName("root");
-    db.setPassword("root");
+    db.setPassword("dinglh1987");
     settingInfo.dbName = QString("db_pcserver");
     settingInfo.dbUserName = QString("root");
-    settingInfo.dbPasswd = QString("root");
+    settingInfo.dbPasswd = QString("dinglh1987");
 
     //检测数据库是否链接成功
     if(!db.open())

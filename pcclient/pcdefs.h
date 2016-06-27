@@ -33,7 +33,11 @@
 #define SOE_BUFFER              QStringLiteral("SOE缓存")
 #define PCCLIENT_ABOUT  		QStringLiteral("关于PCClient")
 #define PCCLIENT_QUIT  			QStringLiteral("退出")
-#define PCCLIENT_CONTEXT  		QStringLiteral("<b>PCClient</b>是电力通讯系统的配套辅助调试工具。<br/><b>V2.01</b>：采用Qt4.7.1实现界面框架搭建，增加远动实时库查看修改功能、通信报文查看功能等。<br/><b>V2.10</b>：采用Qt5.2.1重新搭建界面，增加远动101、104转发表查看，导出以及打印功能。<br/><b>V2.20</b>：增加远动101、104SOE缓存查看功能。<br/><br/>上海思源弘瑞自动化有限公司  版权所有 <b>dinglinhui@hotmail.com</b>")
+#define PCCLIENT_CONTEXT  		QStringLiteral("<b>PCClient</b>是电力通讯系统的配套辅助调试工具。<br/>" \
+                                                "<b>V2.01</b>：采用Qt4.7.1实现界面框架搭建，增加远动实时库查看修改功能、通信报文查看功能等。<br/>" \
+                                                "<b>V2.10</b>：采用Qt5.2.1重新搭建界面，增加远动101、104转发表查看，导出以及打印功能。<br/>" \
+                                                "<b>V2.20</b>：增加远动101、104SOE缓存查看功能。<br/>"\
+                                                "<br/>丁林辉  版权所有 <b>dinglinhui@hotmail.com</b>")
 #define TRANSMIT_FUNCTION  		QStringLiteral("通道功能")
 #define TRANSMIT_CONNECT  		QStringLiteral("连接")
 #define TRANSMIT_DISCONNECT  	QStringLiteral("断开连接")
