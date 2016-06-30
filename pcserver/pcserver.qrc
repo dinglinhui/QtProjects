@@ -224,5 +224,7 @@
         <file>res/images/256/zoom_in.png</file>
         <file>res/images/256/zoom_out.png</file>
         <file>res/images/256/zoom.png</file>
+        <file>res/images/login.jpg</file>
+        <file>res/images/background.jpg</file>
     </qresource>
 </RCC>

@@ -18,8 +18,9 @@ typedef struct def_AdminInfo
 {
     QString adminId;            // 管理员ID
     QString adminName;          // 管理员名称
-    QString adminLevel;         // 管理员等级
+    int adminLevel;             // 管理员等级
     QString adminPasswd;        // 管理员密码
+    QString adminLoginDate;     // 管理员上次登录时间
 }AdminInfo;
 
 typedef struct def_UserInfo

@@ -24,17 +24,25 @@ SOURCES += \
     tcpserver.cpp \
     tcpsocket.cpp \
     threadhandle.cpp \
-    transmittree.cpp \
     utils.cpp \
     xmlparser.cpp \
     analyzedock.cpp \
     logdock.cpp \
-    transmittable.cpp \
     tabwidget.cpp \
     proxymodel.cpp \
-    transmitwidget.cpp \
     welcomewidget.cpp \
-    configdialog.cpp
+    configdialog.cpp \
+    networkinformation.cpp \
+    logindialog.cpp \
+    des.cpp \
+    mainwidget.cpp \
+    communicationwidget.cpp \
+    communicationtable.cpp \
+    communicationtree.cpp \
+    examinationtable.cpp \
+    examinationtree.cpp \
+    examinationwidget.cpp \
+    sqltablemodel.cpp
 
 HEADERS += \
     borderlayout.h \
@@ -47,17 +55,25 @@ HEADERS += \
     tcpserver.h \
     tcpsocket.h \
     threadhandle.h \
-    transmittree.h \
     utils.h \
     xmlparser.h \
     analyzedock.h \
     logdock.h \
-    transmittable.h \
     tabwidget.h \
     proxymodel.h \
-    transmitwidget.h \
     welcomewidget.h \
-    configdialog.h
+    configdialog.h \
+    networkinformation.h \
+    logindialog.h \
+    des.h \
+    mainwidget.h \
+    communicationwidget.h \
+    communicationtable.h \
+    communicationtree.h \
+    examinationtable.h \
+    examinationtree.h \
+    examinationwidget.h \
+    sqltablemodel.h
 
 RESOURCES += pcserver.qrc
 

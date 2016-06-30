@@ -22,10 +22,10 @@ bool DbMySQL::connectMySQL()
     db.setHostName("127.0.0.1");
     db.setDatabaseName("db_pcserver");
     db.setUserName("root");
-    db.setPassword("dinglh1987");
+    db.setPassword("root");
     settingInfo.dbName = QString("db_pcserver");
     settingInfo.dbUserName = QString("root");
-    settingInfo.dbPasswd = QString("dinglh1987");
+    settingInfo.dbPasswd = QString("root");
 
     //检测数据库是否链接成功
     if(!db.open())
@@ -45,7 +45,7 @@ bool DbMySQL::connectMySQL()
         if(!db.open()) {
             QMessageBox::critical(NULL, QObject::tr("连接数据库错误"), db.lastError().text());
             qDebug()<<db.lastError()<<endl;
-//            LogDock::appendLog(db.lastError().text());
+            //            LogDock::appendLog(db.lastError().text());
             return false;
         } else {
             settingInfo.dbHostName = ipInput;
@@ -54,14 +54,15 @@ bool DbMySQL::connectMySQL()
         settingInfo.dbHostName = "127.0.0.1";
     }
     qDebug()<<"Connect database Ok"<< endl;
-//    LogDock::appendLog("Connect database Ok");
+    //    LogDock::appendLog("Connect database Ok");
     return true;
 }
 
-bool DbMySQL::getAdminInfo()
+bool DbMySQL::getAdminInfo(const QString &adminId, const QString &passwd)
 {
-    QString strSql = QString("select admin_id, admin_name, admin_level, admin_passwd from tb_admin");
-
+    QString strSql = QString("select admin_id, admin_name, admin_level, admin_passwd, admin_logindate from tb_admin " \
+                             "where admin_id = '%1' and admin_passwd = '%2'").arg(adminId).arg(passwd);
+    qDebug() << strSql;
     QSqlQuery query(strSql);
     if (!query.isActive()) {
         QMessageBox::warning(NULL, QObject::tr("数据库错误"), query.lastError().text());
@@ -69,13 +70,55 @@ bool DbMySQL::getAdminInfo()
     }
 
     if (!query.next()) {
-        QMessageBox::warning(NULL, QObject::tr("没有找到相关信息"), QObject::tr("数据库无系统设置，请联系DBA。"));
         return false;
     } else {
         sessionInfo.sessionId.adminId         = query.value(0).toString();
-        sessionInfo.sessionId.adminName       = query.value(1).toInt();
-        sessionInfo.sessionId.adminLevel      = query.value(2).toString();
+        sessionInfo.sessionId.adminName       = query.value(1).toString();
+        sessionInfo.sessionId.adminLevel      = query.value(2).toInt();
         sessionInfo.sessionId.adminPasswd     = query.value(3).toString();
+        sessionInfo.sessionId.adminLoginDate  = query.value(4).toString();
+    }
+
+    return true;
+}
+
+bool DbMySQL::updateAdminInfo()
+{
+    QString strSql = QString("update tb_admin set admin_logindate = '%1' " \
+                             "where admin_id = '%2'").arg(sessionInfo.sessionId.adminLoginDate).arg(sessionInfo.sessionId.adminId);
+    qDebug() << strSql;
+    QSqlQuery query(strSql);
+    if (!query.isActive()) {
+        QMessageBox::warning(NULL, QObject::tr("数据库错误"), query.lastError().text());
+        return false;
+    } else {
+        qDebug() << "update table admin_id successful";
+    }
+
+    return true;
+}
+
+bool DbMySQL::getExamInfo(QList<QStringList> &exams)
+{
+    QString strSql = QString("select exam_id, exam_date, exam_status, exam_name from tb_exam");
+    qDebug() << strSql;
+    QSqlQuery query(strSql);
+    if (!query.isActive()) {
+        QMessageBox::warning(NULL, QObject::tr("数据库错误"), query.lastError().text());
+        return false;
+    }
+
+    if (!query.next()) {
+        return false;
+    } else {
+        QStringList exam;
+        do{
+            exam << query.value(0).toString()
+                 << query.value(1).toString()
+                 << query.value(2).toString()
+                 << query.value(3).toString();
+            exams << exam;
+        }while(query.next());
     }
 
     return true;
@@ -135,7 +178,7 @@ bool DbMySQL::createExamTable()
         qDebug() << table;
         strTables.append(table).append(",");
     });
-//    LogDock::appendLog(QString("Use tables(%1)").arg(strTables));
+    //    LogDock::appendLog(QString("Use tables(%1)").arg(strTables));
     return true;
 }
 

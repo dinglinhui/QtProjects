@@ -7,7 +7,9 @@
 #include <QItemSelection>
 #include "pcdefs.h"
 #include "welcomewidget.h"
-#include "transmitwidget.h"
+#include "mainwidget.h"
+#include "examinationwidget.h"
+#include "communicationwidget.h"
 
 class TabWidget: public QTabWidget
 {
@@ -17,6 +19,9 @@ public:
     TabWidget(QWidget *parent = 0);
     ~TabWidget();
 
+public:
+    void addConnManageTab();
+    void addExamManageTab();
 
 public slots:
     void onSocketConnect(const int socketDescriptor, const QString & ip, const quint16 port);
@@ -25,8 +30,9 @@ public slots:
     void removeSubTab(int index);
 
 private:
-//    WelcomeWidget *welcomWidget;
-    TransmitWidget *transmitWidget = nullptr;
+    WelcomeWidget *welcomWidget = nullptr;
+    ExaminationWidget *examinationWidget = nullptr;
+    CommunicationWidget *communicationWidget = nullptr;
 };
 
 #endif

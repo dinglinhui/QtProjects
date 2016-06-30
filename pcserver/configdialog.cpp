@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QGroupBox>
 #include <QRadioButton>
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QDomDocument>
 #include <QDialogButtonBox>
@@ -109,6 +110,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     tabWidget->addTab(applicationsTab, APPLICATION_CONFIG);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    buttonBox->button(QDialogButtonBox::Ok)->setText(CONFIRM);
+    buttonBox->button(QDialogButtonBox::Cancel)->setText(CANCEL);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 

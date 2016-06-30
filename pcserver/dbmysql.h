@@ -7,7 +7,6 @@
 
 class DbMySQL
 {
-
 public:
     explicit DbMySQL();
     ~DbMySQL();
@@ -19,7 +18,10 @@ public:
     // 连接数据库
     bool connectMySQL();
     // 从数据库获取系统设置信息
-    bool getAdminInfo();
+    bool getAdminInfo(const QString &adminId, const QString &passwd);
+    bool updateAdminInfo();
+    // 从数据库获取考试信息
+    bool getExamInfo(QList<QStringList> &exams);
     // 创建考试相关信息表
     bool createExamTable();
     // 创建表格
