@@ -6,8 +6,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 
-class NetworkInformation: public QDialog
-{
+class NetworkInformation: public QDialog {
     Q_OBJECT
 
 private:

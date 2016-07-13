@@ -9,8 +9,7 @@
 #include <QTime>
 
 
-class TcpSocket : public QTcpSocket
-{
+class TcpSocket : public QTcpSocket {
     Q_OBJECT
 public:
     explicit TcpSocket(qintptr socketDescriptor, QObject *parent = 0);

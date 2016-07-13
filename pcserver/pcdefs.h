@@ -7,7 +7,7 @@
 #include <QDir>
 //
 #define PCSERVER_NAME           QString("PCServer")
-#define PCSERVER_VERSION        QString("V1.0.1.0")
+#define PCSERVER_VERSION        QString("V2.0.1.0")
 #define PCSERVER_DATE           QDate::currentDate().toString("yyyyMMdd")
 #define PCSERVER_HOMEDIR        QDir::currentPath()
 #define PCSERVER_CONFIG_FILE    PCSERVER_HOMEDIR.append("/pcserver.config")
@@ -18,9 +18,9 @@
 #define WELCOME_CONTEXT  		QStringLiteral("%1-%2-%3").arg(PCSERVER_NAME).arg(PCSERVER_VERSION).arg(PCSERVER_DATE)
 #define PCSERVER_WELCOME  		QStringLiteral("欢迎首页")
 #define PCSERVER_READY  		QStringLiteral("准备")
-#define PCSERVER_ADMIN          QStringLiteral("当前登录用户:")
+#define PCSERVER_ADMIN          QStringLiteral("当前用户:")
 #define ADMIN_LOGIN_DATE        QStringLiteral("登录时间:")
-#define ADMIN_LAST_LOGIN_DATE   QStringLiteral("上次登录时间:")
+#define ADMIN_LAST_LOGIN_DATE   QStringLiteral("上次登录:")
 #define PCSERVER_FILE_SAVED 	QStringLiteral("文件已保存")
 #define GENERAL_CONFIG  		QStringLiteral("通用配置")
 #define SYSTEM_CONFIG           QStringLiteral("系统配置")
@@ -47,13 +47,17 @@
 #define RTDB_SAVE  				QStringLiteral("保存实时库")
 #define EXAMINATION_MANAGE      QStringLiteral("考试管理")
 #define COMMUNICATION_MANAGE    QStringLiteral("通信管理")
+#define GRAPH_CONTROL           QStringLiteral("图形控制")
+#define PRIME_TEST              QStringLiteral("质数测试")
 #define EXAM_LIST               QStringLiteral("考试场次")
 #define SOE_BUFFER              QStringLiteral("SOE缓存")
+#define FULL_SCREEN      		QStringLiteral("全屏显示")
 #define PCSERVER_ABOUT  		QStringLiteral("关于PCServer")
 #define PCSERVER_QUIT  			QStringLiteral("退出")
-#define ABOUT_CONTEXT           QStringLiteral("<i>PCServer</i>是XXX。" \
-    "<br/><i>V1.00</i>：采用Qt5.4实现界面框架搭建。" \
-    "<br/><br/>XXX有限公司  版权所有 <b>dinglinhui@hotmail.com</b>")
+#define ABOUT_CONTEXT           QStringLiteral("<i>PCServer</i> is high performance communication application." \
+    "<br/><i>V1.0.0.0</i>: Build GUI Framework using Qt5.4 ." \
+    "<br/><i>V2.0.1.0</i>: Added Communication Module." \
+    "<br/><br/>丁林辉 Reserved <b>dinglinhui@hotmail.com</b>")
 #define COMMUNICATION_FUNCTION      QStringLiteral("通道功能")
 #define COMMUNICATION_CONNECT  		QStringLiteral("连接")
 #define COMMUNICATION_DISCONNECT  	QStringLiteral("断开连接")
@@ -83,6 +87,7 @@
 //
 #define QUIT_TITLE                  QStringLiteral("退出%1%2").arg(PCSERVER_NAME).arg("?")
 #define QUIT_TEXT                   QStringLiteral("确定要退出%1%2").arg(PCSERVER_NAME).arg("?")
+#define CALCULATE                   QStringLiteral("计算")
 #define CONFIRM                     QStringLiteral("确定")
 #define CANCEL                      QStringLiteral("取消")
 #define YES                         QStringLiteral("是")
@@ -125,8 +130,7 @@
 #define DOUBLE_DATA   		0X01
 
 /**********************************************************************/
-typedef enum tag_AUTHORITY
-{
+typedef enum tag_AUTHORITY {
     INDEX_AUTHORITY_ROOT = 0, //顶级权限
     INDEX_AUTHORITY_ADMIN,    //报文查看，日志跟踪等除了部分删除功能
     INDEX_AUTHORITY_TEACHER,  //启动考试，学员以及考试相关的增删该查功能
@@ -146,8 +150,7 @@ const QString table_authority[] = {
 };
 
 /**********************************************************************/
-typedef enum tag_EXAM_STATUS
-{
+typedef enum tag_EXAM_STATUS {
     INDEX_EXAM_STATUS_PREPARED = 0,
     INDEX_EXAM_STATUS_STARTING,
     INDEX_EXAM_STATUS_FINISED,
@@ -164,8 +167,7 @@ const QString table_exam_status[] = {
 };
 
 /**********************************************************************/
-typedef enum tag_EXAMINATION
-{
+typedef enum tag_EXAMINATION {
     INDEX_EXAMINATION_ID = 0,//ID
     INDEX_EXAMINATION_DATE,  //考试日期
     INDEX_EXAMINATION_STATUS,//考试状态
@@ -178,22 +180,33 @@ typedef enum tag_EXAMINATION
 #define STRING_EXAMINATION_NAME                QStringLiteral("考试名称")
 
 /**********************************************************************/
+typedef enum tag_COMMUNICATION {
+    INDEX_COMMUNICATION_ID = 0,     //ID
+    INDEX_COMMUNICATION_NAME,       //通信名称
+    INDEX_COMMUNICATION_DATETIME,   //通信时间
+    INDEX_COMMUNICATION_DIRECTION,  //通信方向
+    INDEX_COMMUNICATION_CONTENT,    //通信方向
+    INDEX_COMMUNICATION_MAX_NUM
+} COMMUNICATION;
+#define STRING_COMMUNICATION_ID                  QStringLiteral("序号")
+#define STRING_COMMUNICATION_NAME                QStringLiteral("通道名")
+#define STRING_COMMUNICATION_DATETIME            QStringLiteral("通信时间")
+#define STRING_COMMUNICATION_DIRECTION           QStringLiteral("通信方向")
+#define STRING_COMMUNICATION_CONTENT             QStringLiteral("通信内容")
 
-typedef enum tag_PACKET_DIRECTION
-{
+/**********************************************************************/
+typedef enum tag_PACKET_DIRECTION {
     PACKET_SEND = 0,
     PACKET_RECV,
 } PACKET_DIRECTION;
 
-typedef enum tag_TABLE_LOG
-{
+typedef enum tag_TABLE_LOG {
     LOG_DATE = 0,
     LOG_CONTEXT,
     LOG_MAX_NUM
 } TABLE_LOG;
 
-typedef enum tag_LINKINFO
-{
+typedef enum tag_LINKINFO {
     LINKINFO_CONNECTED = 0,
     LINKINFO_DISCONNECTED,
     LINKINFO_MAX_NUM
@@ -204,8 +217,7 @@ typedef enum tag_LINKINFO
 /*
  *  定义串口通信特性
  */
-typedef struct tag_COMPORT_INFO
-{
+typedef struct tag_COMPORT_INFO {
     QString portName;/* 串口名 */
     QString baudRate; /* 波特率 */
     QString dataBit; /* 数据位 */
@@ -216,8 +228,7 @@ typedef struct tag_COMPORT_INFO
 /*
  *  定义网络通信特性
  */
-typedef struct tag_TCPPORT_INFO
-{
+typedef struct tag_TCPPORT_INFO {
     QString localIP;
     QString remoteIP;
     QString remotePort;
@@ -225,8 +236,7 @@ typedef struct tag_TCPPORT_INFO
     QString isServer;
 } TCPPORT_INFO;
 
-typedef struct tag_UDPPORT_INFO
-{
+typedef struct tag_UDPPORT_INFO {
     QString localIP;
     QString remoteIP;
     QString remotePort;

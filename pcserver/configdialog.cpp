@@ -8,10 +8,12 @@
 #include <QDialogButtonBox>
 #include "configdialog.h"
 #include "pcdefs.h"
+#include "utils.h"
+
+extern SessionInfo sessionInfo;
 
 GeneralTab::GeneralTab(QWidget *parent) :
-    QWidget(parent)
-{
+    QWidget(parent) {
     QGroupBox *communicationGroup = new QGroupBox(COMMUNICATION_CONFIG);
 
     QLabel *listenPortLabel = new QLabel(COMMUNICATION_LISTENPORT);
@@ -30,24 +32,20 @@ GeneralTab::GeneralTab(QWidget *parent) :
     this->setLayout(mainLayout);
 }
 
-QString GeneralTab::getListenPort()
-{
+QString GeneralTab::getListenPort() {
     return m_pListenPortEdit->displayText();
 }
 
-void GeneralTab::setListenPort(const QString &port)
-{
+void GeneralTab::setListenPort(const QString &port) {
     m_pListenPortEdit->setText(port);
 }
 
-void GeneralTab::changeTransPage(int id)
-{
+void GeneralTab::changeTransPage(int id) {
     m_pTransWidget->setCurrentIndex(id);
 }
 
 TransPage::TransPage(QWidget *parent) :
-    QWidget(parent)
-{
+    QWidget(parent) {
     QLabel *tcpPortLabel = new QLabel(COMMUNICATION_TCPPORT);
     tcpPortLabel->setAlignment(Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter);
     m_pTcpPortEdit = new QLineEdit();
@@ -62,19 +60,16 @@ TransPage::TransPage(QWidget *parent) :
     setLayout(mainLayout);
 }
 
-QString TransPage::getTransPort()
-{
+QString TransPage::getTransPort() {
     return m_pTcpPortEdit->displayText();
 }
 
-void TransPage::setTransPort(const QString& port)
-{
+void TransPage::setTransPort(const QString& port) {
     m_pTcpPortEdit->setText(port);
 }
 
 ReservePage::ReservePage(QWidget *parent) :
-    QWidget(parent)
-{
+    QWidget(parent) {
     QLabel *descLabel = new QLabel(QStringLiteral("正常使用情况下不需要启用转发表功能！"));
     descLabel->setAlignment(Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter);
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -83,14 +78,12 @@ ReservePage::ReservePage(QWidget *parent) :
 }
 
 PermissionsTab::PermissionsTab(QWidget *parent) :
-    QWidget(parent)
-{
+    QWidget(parent) {
 
 }
 
 ApplicationsTab::ApplicationsTab(QWidget *parent) :
-    QWidget(parent)
-{
+    QWidget(parent) {
 
 }
 
@@ -102,8 +95,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     generalTab(new GeneralTab()),
     permissionsTab(new PermissionsTab()),
     applicationsTab(new ApplicationsTab()),
-    parser(new XmlParser())
-{
+    parser(new XmlParser()) {
+
     QTabWidget *tabWidget = new QTabWidget(parent);
     tabWidget->addTab(generalTab, GENERAL_CONFIG);
     tabWidget->addTab(permissionsTab, SYSTEM_CONFIG);
@@ -123,21 +116,20 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     this->setWindowTitle(PCSERVER_CONFIG);
 
     QString port = parser->getValue(XML_ELEMENT_LISTEN_PORT);
+    if (port == "")
+        port = sessionInfo.systemInfo.serverInfo.listenPort;
     generalTab->setListenPort(port);
 }
 
-ConfigDialog::~ConfigDialog()
-{
+ConfigDialog::~ConfigDialog() {
     if(nullptr != parser)
         delete parser, parser = nullptr;
 }
 
-GeneralTab *ConfigDialog::getGeneralTab()
-{
+GeneralTab *ConfigDialog::getGeneralTab() {
     return generalTab;
 }
 
-bool ConfigDialog::saveConfig(void *context, const QString &type)
-{
+bool ConfigDialog::saveConfig(void *context, const QString &type) {
     parser->writeXml(context, type);
 }

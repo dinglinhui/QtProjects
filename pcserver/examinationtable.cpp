@@ -8,8 +8,8 @@ ExaminationTable::ExaminationTable(QWidget *parent) :
     tablePopMenu(new QMenu(this)),
     printAction(new QAction(QIcon(":/res/images/256/print.png"), TRANSMIT_PRINT, this)),
     excelAction(new QAction(TRANSMIT_EXPORT_EXCEL, this)),
-    csvAction(new QAction(TRANSMIT_EXPORT_CSV, this))
-{
+    csvAction(new QAction(TRANSMIT_EXPORT_CSV, this)) {
+
     tableModel->setDynamicSortFilter(true);
     tableModel->setSourceModel(createModel(this));
     this->setModel(tableModel);
@@ -30,13 +30,11 @@ ExaminationTable::ExaminationTable(QWidget *parent) :
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(onTableCustomContextMenuRequested(QPoint)));
 }
 
-ExaminationTable::~ExaminationTable()
-{
+ExaminationTable::~ExaminationTable() {
     m_pParent = nullptr;
 }
 
-QAbstractItemModel *ExaminationTable::createModel(QObject *parent)
-{
+QAbstractItemModel *ExaminationTable::createModel(QObject *parent) {
     QStandardItemModel *model = new QStandardItemModel(0, INDEX_EXAMINATION_MAX_NUM, parent);
 
     model->setHeaderData(INDEX_EXAMINATION_ID, Qt::Horizontal, STRING_EXAMINATION_ID);
@@ -47,8 +45,7 @@ QAbstractItemModel *ExaminationTable::createModel(QObject *parent)
     return model;
 }
 
-void ExaminationTable::fillModel(const QList<QStringList> &exams)
-{
+void ExaminationTable::fillModel(const QList<QStringList> &exams) {
     std::for_each(std::begin(exams), std::end(exams), [&](QStringList exam){
         int arow = tableModel->rowCount();
         tableModel->insertRow(arow);
@@ -59,8 +56,7 @@ void ExaminationTable::fillModel(const QList<QStringList> &exams)
     });
 }
 
-void ExaminationTable::onTableCustomContextMenuRequested(QPoint pos)
-{
+void ExaminationTable::onTableCustomContextMenuRequested(QPoint pos) {
     tablePopMenu->addAction(printAction);
     tablePopMenu->addSeparator();
     tablePopMenu->addAction(excelAction);

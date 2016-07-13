@@ -5,8 +5,7 @@
 #include <QLineEdit>
 #include <QPainter>
 
-class LoginDialog: public QDialog
-{
+class LoginDialog: public QDialog {
     Q_OBJECT
 public:
     LoginDialog(QWidget* = 0);

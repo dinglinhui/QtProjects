@@ -5,8 +5,8 @@
 
 TcpSocket::TcpSocket(qintptr socketDescriptor, QObject *parent) : //构造函数在主线程执行，lambda在子线程
     QTcpSocket(parent),
-    socketID(socketDescriptor)
-{
+    socketID(socketDescriptor) {
+
     this->setSocketDescriptor(socketDescriptor);
     connect(this,&TcpSocket::readyRead,this,&TcpSocket::readData);
     dis = connect(this,&TcpSocket::disconnected,[&](){
@@ -17,42 +17,33 @@ TcpSocket::TcpSocket(qintptr socketDescriptor, QObject *parent) : //构造函数
     connect(&watcher,&QFutureWatcher<QByteArray>::canceled,this,&TcpSocket::startNext);
 }
 
-TcpSocket::~TcpSocket()
-{
+TcpSocket::~TcpSocket() {
 }
 
 
-void TcpSocket::sentData(const QByteArray &data, const int id)
-{
-    if(id == socketID)
-    {
+void TcpSocket::sentData(const QByteArray &data, const int id) {
+    if(id == socketID) {
         write(data);
     }
 }
 
-void TcpSocket::disConTcp(int i)
-{
+void TcpSocket::disConTcp(int i) {
     qDebug() << i;
-    if (i == socketID)
-    {
+    if (i == socketID) {
         this->disconnectFromHost();
-    }
-    else if (i == -1) //-1为全部断开
-    {
+    } else if (i == -1) { //-1为全部断开
         disconnect(dis); //先断开连接的信号槽，防止二次析构
         this->disconnectFromHost();
         this->deleteLater();
     }
 }
 
-void TcpSocket::readData()
-{
+void TcpSocket::readData() {
     auto data  = handleData(this->readAll(),this->peerAddress().toString(),this->peerPort());
     qDebug() << data;
 }
 
-QByteArray TcpSocket::handleData(QByteArray data, const QString &ip, quint16 port)
-{
+QByteArray TcpSocket::handleData(QByteArray data, const QString &ip, quint16 port) {
     QTime time;
     time.start();
 
@@ -64,12 +55,15 @@ QByteArray TcpSocket::handleData(QByteArray data, const QString &ip, quint16 por
     return data;
 }
 
-void TcpSocket::startNext()
-{
+void TcpSocket::startNext() {
     qDebug() << "watcher" << watcher.future().result();
     this->write(watcher.future().result());
     if (!datas.isEmpty())
     {
-        watcher.setFuture(QtConcurrent::run(this,&TcpSocket::handleData,datas.dequeue(),this->peerAddress().toString(),this->peerPort()));
+        watcher.setFuture(QtConcurrent::run(this,
+                                            &TcpSocket::handleData,
+                                            datas.dequeue(),
+                                            this->peerAddress().toString(),
+                                            this->peerPort()));
     }
 }

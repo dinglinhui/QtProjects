@@ -3,52 +3,43 @@
 #include "borderlayout.h"
 
 BorderLayout::BorderLayout(QWidget *parent, int margin, int spacing)
-    : QLayout(parent)
-{
+    : QLayout(parent) {
     setMargin(margin);
     setSpacing(spacing);
 }
 
-BorderLayout::BorderLayout(int spacing)
-{
+BorderLayout::BorderLayout(int spacing) {
     setSpacing(spacing);
 }
 
 
-BorderLayout::~BorderLayout()
-{
+BorderLayout::~BorderLayout() {
     QLayoutItem *l;
     while ((l = takeAt(0)))
         delete l;
 }
 
-void BorderLayout::addItem(QLayoutItem *item)
-{
+void BorderLayout::addItem(QLayoutItem *item) {
     add(item, West);
 }
 
-void BorderLayout::addWidget(QWidget *widget, Position position)
-{
+void BorderLayout::addWidget(QWidget *widget, Position position) {
     add(new QWidgetItem(widget), position);
 }
 
-Qt::Orientations BorderLayout::expandingDirections() const
-{
+Qt::Orientations BorderLayout::expandingDirections() const {
     return Qt::Horizontal | Qt::Vertical;
 }
 
-bool BorderLayout::hasHeightForWidth() const
-{
+bool BorderLayout::hasHeightForWidth() const {
     return false;
 }
 
-int BorderLayout::count() const
-{
+int BorderLayout::count() const {
     return list.size();
 }
 
-QLayoutItem *BorderLayout::itemAt(int index) const
-{
+QLayoutItem *BorderLayout::itemAt(int index) const {
     ItemWrapper *wrapper = list.value(index);
     if (wrapper)
         return wrapper->item;
@@ -56,13 +47,11 @@ QLayoutItem *BorderLayout::itemAt(int index) const
         return 0;
 }
 
-QSize BorderLayout::minimumSize() const
-{
+QSize BorderLayout::minimumSize() const {
     return calculateSize(MinimumSize);
 }
 
-void BorderLayout::setGeometry(const QRect &rect)
-{
+void BorderLayout::setGeometry(const QRect &rect) {
     ItemWrapper *center = 0;
     int eastWidth = 0;
     int westWidth = 0;
@@ -112,31 +101,33 @@ void BorderLayout::setGeometry(const QRect &rect)
 
             westWidth += item->geometry().width() + spacing();
         } else if (position == East) {
-            item->setGeometry(QRect(item->geometry().x(), item->geometry().y(),
-                                    item->sizeHint().width(), centerHeight));
+            item->setGeometry(QRect(item->geometry().x(),
+                                    item->geometry().y(),
+                                    item->sizeHint().width(),
+                                    centerHeight));
 
             eastWidth += item->geometry().width() + spacing();
 
-            item->setGeometry(QRect(
-                              rect.x() + rect.width() - eastWidth + spacing(),
-                              northHeight, item->geometry().width(),
-                              item->geometry().height()));
+            item->setGeometry(QRect(rect.x() + rect.width() - eastWidth + spacing(),
+                                    northHeight,
+                                    item->geometry().width(),
+                                    item->geometry().height()));
         }
     }
 
-    if (center)
-        center->item->setGeometry(QRect(westWidth, northHeight,
+    if (center) {
+        center->item->setGeometry(QRect(westWidth,
+                                        northHeight,
                                         rect.width() - eastWidth - westWidth,
                                         centerHeight));
+    }
 }
 
-QSize BorderLayout::sizeHint() const
-{
+QSize BorderLayout::sizeHint() const {
     return calculateSize(SizeHint);
 }
 
-QLayoutItem *BorderLayout::takeAt(int index)
-{
+QLayoutItem *BorderLayout::takeAt(int index) {
     if (index >= 0 && index < list.size()) {
         ItemWrapper *layoutStruct = list.takeAt(index);
         return layoutStruct->item;
@@ -144,13 +135,11 @@ QLayoutItem *BorderLayout::takeAt(int index)
     return 0;
 }
 
-void BorderLayout::add(QLayoutItem *item, Position position)
-{
+void BorderLayout::add(QLayoutItem *item, Position position) {
     list.append(new ItemWrapper(item, position));
 }
 
-QSize BorderLayout::calculateSize(SizeType sizeType) const
-{
+QSize BorderLayout::calculateSize(SizeType sizeType) const {
     QSize totalSize;
 
     for (int i = 0; i < list.size(); ++i) {

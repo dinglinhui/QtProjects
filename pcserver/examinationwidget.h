@@ -5,8 +5,7 @@
 #include "examinationtree.h"
 #include "examinationtable.h"
 
-class ExaminationWidget : public QWidget
-{
+class ExaminationWidget : public QWidget {
     Q_OBJECT
 public:
     explicit ExaminationWidget(QWidget *parent = 0);

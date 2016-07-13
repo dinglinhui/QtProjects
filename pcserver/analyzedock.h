@@ -6,8 +6,7 @@
 #include "proxymodel.h"
 #include "pcdefs.h"
 
-class AnalyzeDock : public QDockWidget
-{
+class AnalyzeDock : public QDockWidget {
 public:
     explicit AnalyzeDock(const QString &title, QWidget *parent = 0);
     ~AnalyzeDock();

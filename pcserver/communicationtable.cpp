@@ -7,8 +7,8 @@ CommunicationTable::CommunicationTable(QWidget *parent) :
     tablePopMenu(new QMenu(this)),
     printAction(new QAction(QIcon(":/res/images/256/print.png"), TRANSMIT_PRINT, this)),
     excelAction(new QAction(TRANSMIT_EXPORT_EXCEL, this)),
-    csvAction(new QAction(TRANSMIT_EXPORT_CSV, this))
-{
+    csvAction(new QAction(TRANSMIT_EXPORT_CSV, this)) {
+
     tableModel->setDynamicSortFilter(true);
     tableModel->setSourceModel(createModel(this));
     this->setModel(tableModel);
@@ -22,32 +22,32 @@ CommunicationTable::CommunicationTable(QWidget *parent) :
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn); //水平滚动条按需显示
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->setSelectionMode(QAbstractItemView::SingleSelection);
-    this->setColumnWidth(INDEX_EXAMINATION_ID, 100);
-    this->setColumnWidth(INDEX_EXAMINATION_DATE, 150);
-    this->setColumnWidth(INDEX_EXAMINATION_STATUS, 100);
+    this->setColumnWidth(INDEX_COMMUNICATION_ID, 100);
+    this->setColumnWidth(INDEX_COMMUNICATION_NAME, 150);
+    this->setColumnWidth(INDEX_COMMUNICATION_DATETIME, 150);
+    this->setColumnWidth(INDEX_COMMUNICATION_DIRECTION, 100);
+//    this->setColumnWidth(INDEX_COMMUNICATION_DIRECTION, 100);
     this->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(onTableCustomContextMenuRequested(QPoint)));
 }
 
-CommunicationTable::~CommunicationTable()
-{
+CommunicationTable::~CommunicationTable() {
 
 }
 
-QAbstractItemModel *CommunicationTable::createModel(QObject *parent)
-{
-    QStandardItemModel *model = new QStandardItemModel(0, INDEX_EXAMINATION_MAX_NUM, parent);
+QAbstractItemModel *CommunicationTable::createModel(QObject *parent) {
+    QStandardItemModel *model = new QStandardItemModel(0, INDEX_COMMUNICATION_MAX_NUM, parent);
 
-    model->setHeaderData(INDEX_EXAMINATION_ID, Qt::Horizontal, STRING_EXAMINATION_ID);
-    model->setHeaderData(INDEX_EXAMINATION_DATE, Qt::Horizontal, STRING_EXAMINATION_DATE);
-    model->setHeaderData(INDEX_EXAMINATION_STATUS, Qt::Horizontal, STRING_EXAMINATION_STATUS);
-    model->setHeaderData(INDEX_EXAMINATION_NAME, Qt::Horizontal, STRING_EXAMINATION_NAME);
+    model->setHeaderData(INDEX_COMMUNICATION_ID, Qt::Horizontal, STRING_COMMUNICATION_ID);
+    model->setHeaderData(INDEX_COMMUNICATION_NAME, Qt::Horizontal, STRING_COMMUNICATION_NAME);
+    model->setHeaderData(INDEX_COMMUNICATION_DATETIME, Qt::Horizontal, STRING_COMMUNICATION_DATETIME);
+    model->setHeaderData(INDEX_COMMUNICATION_DIRECTION, Qt::Horizontal, STRING_COMMUNICATION_DIRECTION);
+    model->setHeaderData(INDEX_COMMUNICATION_CONTENT, Qt::Horizontal, STRING_COMMUNICATION_CONTENT);
 
     return model;
 }
 
-void CommunicationTable::onTableCustomContextMenuRequested(QPoint pos)
-{
+void CommunicationTable::onTableCustomContextMenuRequested(QPoint pos) {
     tablePopMenu->addAction(printAction);
     tablePopMenu->addSeparator();
     tablePopMenu->addAction(excelAction);

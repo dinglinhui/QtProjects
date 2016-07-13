@@ -7,8 +7,7 @@
 #include <QDebug>
 #include "tcpserver.h"
 
-class PCServer: public QThread
-{
+class PCServer: public QThread {
     Q_OBJECT
 public:
     explicit PCServer();

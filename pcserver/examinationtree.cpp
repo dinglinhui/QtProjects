@@ -8,8 +8,8 @@ ExaminationTree::ExaminationTree(QWidget *parent) :
     treeModel(new QStandardItemModel(1, 1)),
     examManage(new QStandardItem(EXAM_LIST)),
     treePopMenu(new QMenu(this)),
-    callAction(new QAction(QIcon(":/res/images/256/reload.png"), COMMUNICATION_CALL, this))
-{
+    callAction(new QAction(QIcon(":/res/images/256/reload.png"), COMMUNICATION_CALL, this)) {
+
     examManage->setIcon(QIcon(":/res/images/256/document.png"));
 
     treeModel->setHeaderData(0, Qt::Horizontal, EXAM_LIST);
@@ -26,18 +26,15 @@ ExaminationTree::ExaminationTree(QWidget *parent) :
     connect(this, SIGNAL(treeClicked(const QModelIndex &)), m_pParent, SLOT(onTreeClicked(const QModelIndex &)));
 }
 
-ExaminationTree::~ExaminationTree()
-{
+ExaminationTree::~ExaminationTree() {
     m_pParent = nullptr;
 }
 
-QStandardItemModel *ExaminationTree::getModel()
-{
+QStandardItemModel *ExaminationTree::getModel() {
     return treeModel;
 }
 
-void ExaminationTree::mousePressEvent(QMouseEvent *event)
-{
+void ExaminationTree::mousePressEvent(QMouseEvent *event) {
     QTreeView::mousePressEvent(event);
 
     if (event->buttons() == Qt::LeftButton)
@@ -46,8 +43,7 @@ void ExaminationTree::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void ExaminationTree::onTreeCustomContextMenuRequested(QPoint pos)
-{
+void ExaminationTree::onTreeCustomContextMenuRequested(QPoint pos) {
     treePopMenu->addAction(callAction);
 
     treePopMenu->exec(QCursor::pos());

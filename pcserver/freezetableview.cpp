@@ -5,8 +5,7 @@
 #include <QScrollBar>
 
 //! [constructor]
-FreezeTableView::FreezeTableView(QAbstractItemModel * model)
-{
+FreezeTableView::FreezeTableView(QAbstractItemModel * model) {
 	setModel(model);
 	frozenTableView = new QTableView(this);
 
@@ -22,14 +21,12 @@ FreezeTableView::FreezeTableView(QAbstractItemModel * model)
 }
 //! [constructor]
 
-FreezeTableView::~FreezeTableView()
-{
+FreezeTableView::~FreezeTableView() {
 	delete frozenTableView;
 }
 
 //! [init part1]
-void FreezeTableView::init()
-{
+void FreezeTableView::init() {
 	frozenTableView->setModel(model());
 	frozenTableView->setFocusPolicy(Qt::NoFocus);
 	frozenTableView->verticalHeader()->hide();
@@ -61,8 +58,7 @@ void FreezeTableView::init()
 //! [init part2]
 
 //! [sections]
-void FreezeTableView::updateSectionWidth(int logicalIndex, int, int newSize)
-{
+void FreezeTableView::updateSectionWidth(int logicalIndex, int, int newSize) {
 	if (logicalIndex == 0)
 	{
 		frozenTableView->setColumnWidth(0, newSize);
@@ -70,15 +66,13 @@ void FreezeTableView::updateSectionWidth(int logicalIndex, int, int newSize)
 	}
 }
 
-void FreezeTableView::updateSectionHeight(int logicalIndex, int, int newSize)
-{
+void FreezeTableView::updateSectionHeight(int logicalIndex, int, int newSize) {
 	frozenTableView->setRowHeight(logicalIndex, newSize);
 }
 //! [sections]
 
 //! [resize]
-void FreezeTableView::resizeEvent(QResizeEvent * event)
-{
+void FreezeTableView::resizeEvent(QResizeEvent * event) {
 	QTableView::resizeEvent(event);
 	updateFrozenTableGeometry();
 }

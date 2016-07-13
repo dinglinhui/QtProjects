@@ -17,11 +17,11 @@
 #include "analyzedock.h"
 #include "logdock.h"
 #include "dbmysql.h"
+#include "primedialog.h"
 #include "pcdefs.h"
 #include "utils.h"
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -35,9 +35,12 @@ public:
 
 private slots:
     void onAbout();
+    void onPrimeTestDlg();
+    void onFullScreen(void);
     void onConfigDlg();
     void onExamManageTab();
     void onConnManageTab();
+    void onGraphControlTab();
 
 private:
     //TCP Server
@@ -63,10 +66,15 @@ private:
 
     //Action
     QAction *m_pConfigAct;
+	QAction *m_pPrimeTestAct;
     QAction *m_pExamManageAct;
     QAction *m_pCommManageAct;
+    QAction *m_pGraphControlAct;
+    QAction *m_pFullScreenAct;
     QAction *m_pQuitAct;
     QAction *m_pAboutAct;
+
+    bool m_bFullScreen;
 };
 
 #endif // MAINWINDOW_H

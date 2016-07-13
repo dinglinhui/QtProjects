@@ -14,8 +14,8 @@
 extern DbMySQL db;
 
 LoginDialog::LoginDialog(QWidget* parent) :
-    QDialog(parent)
-{
+    QDialog(parent) {
+
     QLabel* showLabel = new QLabel;
     QImage image(":/res/images/login.jpg");
     showLabel->setPixmap(QPixmap::fromImage(image));
@@ -52,14 +52,12 @@ LoginDialog::LoginDialog(QWidget* parent) :
     this->setWindowTitle(tr("登录PCServer"));
 }
 
-LoginDialog::~LoginDialog()
-{
+LoginDialog::~LoginDialog() {
     delete usrLineEdit;
     delete pwdLineEdit;
 }
 
-void LoginDialog::accept()
-{
+void LoginDialog::accept() {
     // 从数据库获取设置信息
     QString newPasswd(pwdLineEdit->text().toLocal8Bit().toBase64());
     if (db.getAdminInfo(usrLineEdit->text().trimmed(), newPasswd)) {
@@ -69,9 +67,7 @@ void LoginDialog::accept()
 
         QDialog::accept();
         this->close();
-    }
-    else
-    {
+    } else {
         QMessageBox::warning(this, tr("警告"), tr("用户或密码错误！"), QMessageBox::Yes);
         usrLineEdit->setFocus();
     }
@@ -79,9 +75,9 @@ void LoginDialog::accept()
 
 void LoginDialog::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
-    QPixmap pix;
-    pix.load(":/res/images/background.jpg");
-    painter.drawPixmap(0,0,350,250,pix);
+//    QPainter painter(this);
+//    QPixmap pix;
+//    pix.load(":/res/images/background.jpg");
+//    painter.drawPixmap(0,0,350,250,pix);
 }
 

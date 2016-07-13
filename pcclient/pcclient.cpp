@@ -386,11 +386,9 @@ void PCClient::saveRtdbData(QMap<int, QStringList> &map)
 void PCClient::switchStation(const QByteArray &buffer)
 {
     int flag = 0;
-    if (buffer.data()[0] == 0X68)
-    {
+    if (buffer.data()[0] == 0X68) {
         flag = (unsigned char) buffer.data()[5];
-        switch (flag)
-        {
+        switch (flag) {
         case REPORT_MESSAGE:
             m_pWidget->m_pCommpktTab->displayReport(buffer);
             break;

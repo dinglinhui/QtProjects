@@ -5,8 +5,7 @@
 #include "communicationtable.h"
 #include "communicationtree.h"
 
-class CommunicationWidget : public QWidget
-{
+class CommunicationWidget : public QWidget {
     Q_OBJECT
 public:
     explicit CommunicationWidget(QWidget *parent = 0);

@@ -7,13 +7,11 @@
 #include <QHash>
 //线程管理类，类似于一个线程池，单例类
 //两种初始化方式，一种是每个线程处理的连接数，一个是一共多少个线程
-class ThreadHandle
-{
+class ThreadHandle {
 public:
     ~ThreadHandle();
 
-    enum ThreadType
-    {
+    enum ThreadType {
         THREADSIZE, //固定线程数
         HANDLESIZE //固定每个线程处理多少连接
     };

@@ -105,14 +105,12 @@ void CommPktTab::analyzeCommPkt(int rowIndex)
     emit analyzePacketSignal(rowList);
 }
 
-void CommPktTab::masterFilterChanged(const QString & master)
-{
+void CommPktTab::masterFilterChanged(const QString & master) {
     QRegExp regExp(master);
     proxyModel->setFilterRegExp(regExp);
 }
 
-void CommPktTab::on_customContextMenuRequested(QPoint pos)
-{
+void CommPktTab::on_customContextMenuRequested(QPoint pos) {
     popMenu->addAction(analyzeAction);
     popMenu->addSeparator();
     popMenu->addAction(clearAction);
@@ -121,30 +119,29 @@ void CommPktTab::on_customContextMenuRequested(QPoint pos)
     popMenu->exec(QCursor::pos());
 }
 
-void CommPktTab::on_doubleClicked(const QModelIndex &index)
-{
+void CommPktTab::on_doubleClicked(const QModelIndex &index) {
     analyzeCommPkt(index.row());
 }
 
-void CommPktTab::on_clearActionTriggered()
-{
+void CommPktTab::on_clearActionTriggered() {
     proxyModel->removeRows(0, proxyModel->rowCount());
 }
 
-void CommPktTab::on_saveActionTriggered()
-{
+void CommPktTab::on_saveActionTriggered() {
     QFileDialog::Options options;
     QString selectedFilter;
     QString masterName;
     commpktTree->getCurrentItemName(masterName);
     QString fileName = QFileDialog::getSaveFileName(this,
-                                                    COMMPKT_POPMENU_SAVEPACKET, masterName, tr("Text Files (*.txt);;All Files (*)"), &selectedFilter, options);
+                                                    COMMPKT_POPMENU_SAVEPACKET,
+                                                    masterName,
+                                                    tr("Text Files (*.txt);;All Files (*)"),
+                                                    &selectedFilter,
+                                                    options);
 
-    if (!fileName.isEmpty())
-    {
+    if (!fileName.isEmpty()) {
         QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text))
-        {
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
             QMessageBox::warning(this, tr("Application"), tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
             return;
         }
@@ -153,8 +150,7 @@ void CommPktTab::on_saveActionTriggered()
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        for (int rowIndex = 0; rowIndex < proxyModel->rowCount(); rowIndex++)
-        {
+        for (int rowIndex = 0; rowIndex < proxyModel->rowCount(); rowIndex++) {
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_MASTER)).toString() << "\t";
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_SEND_RECV)).toString() << "\t";
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_TIME)).toString() << "\n";
@@ -169,11 +165,9 @@ void CommPktTab::on_saveActionTriggered()
     }
 }
 
-void CommPktTab::on_analyzeActionTriggered()
-{
+void CommPktTab::on_analyzeActionTriggered() {
     QModelIndex index = tableView->currentIndex();
-    if (index.row() != -1)
-    {
+    if (index.row() != -1) {
         analyzeCommPkt(index.row());
     }
 }
@@ -184,8 +178,7 @@ void CommPktTab::on_analyzeActionTriggered()
  **
  **返回值 :成功后返回true;否则返回false
  */
-bool CommPktTab::removeDirWithContent(const QString &dirName)
-{
+bool CommPktTab::removeDirWithContent(const QString &dirName) {
     static QVector<QString> dirNames;
     QDir dir;
     QFileInfoList filst;
@@ -193,35 +186,25 @@ bool CommPktTab::removeDirWithContent(const QString &dirName)
 
     //初始化
     dirNames.clear();
-    if (dir.exists())
-    {
+    if (dir.exists()) {
         dirNames << dirName;
-    }
-    else
-    {
+    } else {
         return true;
     }
 
     //遍历各级文件夹，并将这些文件夹中的文件删除
-    for (int i = 0; i < dirNames.size(); ++i)
-    {
+    for (int i = 0; i < dirNames.size(); ++i) {
         dir.setPath(dirNames[i]);
         filst = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::Readable | QDir::Writable | QDir::Hidden | QDir::NoDotAndDotDot, QDir::Name);
-        if (filst.size() > 0)
-        {
+        if (filst.size() > 0) {
             curFi = filst.begin();
-            while (curFi != filst.end())
-            {
+            while (curFi != filst.end()) {
                 //遇到文件夹,则添加至文件夹列表dirs尾部
-                if (curFi->isDir())
-                {
+                if (curFi->isDir()) {
                     dirNames.push_back(curFi->filePath());
-                }
-                else if (curFi->isFile())
-                {
+                } else if (curFi->isFile()) {
                     //遇到文件,则删除之
-                    if (!dir.remove(curFi->fileName()))
-                    {
+                    if (!dir.remove(curFi->fileName())) {
                         return false;
                     }
                 }
@@ -231,11 +214,9 @@ bool CommPktTab::removeDirWithContent(const QString &dirName)
     }
 
     //删除文件夹
-    for (int i = dirNames.size() - 1; i >= 0; --i)
-    {
+    for (int i = dirNames.size() - 1; i >= 0; --i) {
         dir.setPath(dirNames[i]);
-        if (!dir.rmdir("."))
-        {
+        if (!dir.rmdir(".")) {
             return false;
         }
     }
@@ -243,22 +224,17 @@ bool CommPktTab::removeDirWithContent(const QString &dirName)
     return true;
 }
 
-void CommPktTab::addPacketInfo(QAbstractItemModel *model, const QStringList &list)
-{
+void CommPktTab::addPacketInfo(QAbstractItemModel *model, const QStringList &list) {
     QString mkdir = PCCLIENT_HOME.append("/packet");
-    if (m_nSaveTimes >= 30) //当保存的文件大于30个的时候
-    {
+    if (m_nSaveTimes >= 30) { //当保存的文件大于30个的时候
         removeDirWithContent(mkdir);
         m_nSaveTimes = 0;
     }
 
-    if (proxyModel->rowCount() >= 5000)
-    {
+    if (proxyModel->rowCount() >= 5000) {
         QDir dir;
-        if (!dir.exists(mkdir))
-        {
-            if (dir.mkpath(mkdir))
-            {
+        if (!dir.exists(mkdir)) {
+            if (dir.mkpath(mkdir)) {
                 qDebug() << "Created dir" << mkdir << "success!";
             }
         }
@@ -267,8 +243,7 @@ void CommPktTab::addPacketInfo(QAbstractItemModel *model, const QStringList &lis
         QString fileName = mkdir.append("/packet_").append(timeStr).append(".txt");
         qDebug() << mkdir;
         QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text))
-        {
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
             qDebug() << "open file" << fileName << " error!";
         }
 
@@ -276,8 +251,7 @@ void CommPktTab::addPacketInfo(QAbstractItemModel *model, const QStringList &lis
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        for (int rowIndex = 0; rowIndex < proxyModel->rowCount(); rowIndex++)
-        {
+        for (int rowIndex = 0; rowIndex < proxyModel->rowCount(); rowIndex++) {
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_MASTER)).toString() << "\t";
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_SEND_RECV)).toString() << "\t";
             out << proxyModel->data(proxyModel->index(rowIndex, TABLE_COMMPKT_TIME)).toString() << "\t";
@@ -300,15 +274,12 @@ void CommPktTab::addPacketInfo(QAbstractItemModel *model, const QStringList &lis
     tableView->scrollToBottom();
     //
     //	emit analyzeMasterSignal(QString(list.at(TABLE_COMMPKT_MASTER)));
-    if (!commpktTree->searchItems(QString(list.at(TABLE_COMMPKT_MASTER))))
-    {
+    if (!commpktTree->searchItems(QString(list.at(TABLE_COMMPKT_MASTER)))) {
         commpktTree->insertItems(QString(list.at(TABLE_COMMPKT_MASTER)));
     }
-
 }
 
-QAbstractItemModel *CommPktTab::createModel(QObject *parent)
-{
+QAbstractItemModel *CommPktTab::createModel(QObject *parent) {
     QStandardItemModel *model = new QStandardItemModel(0, TABLE_COMMPKT_MAX_NUM, parent);
 
     model->setHeaderData(TABLE_COMMPKT_MASTER, Qt::Horizontal, COMMPKT_MASTER);
@@ -319,10 +290,8 @@ QAbstractItemModel *CommPktTab::createModel(QObject *parent)
     return model;
 }
 
-void CommPktTab::displayReport(const QByteArray &buffer)
-{
-    if (!m_bRolling)
-    {
+void CommPktTab::displayReport(const QByteArray &buffer) {
+    if (!m_bRolling) {
         return;
     }
 
@@ -332,29 +301,24 @@ void CommPktTab::displayReport(const QByteArray &buffer)
     QString pktDirection;
     QString pktContent;
 
-    char pMasterText[16] =
-    { 0 };
+    char pMasterText[16] = { 0 };
     qstrncpy(pMasterText, buf.data() + 7, 16);
     int nPktDirection = (unsigned char) buf.data()[23]; //0-发送；1-接收
     int nRecordNum = (unsigned char) buf.data()[24]; //默认为1
 
-    if (nRecordNum != 1) //上报报文默认为1
-    {
+    //上报报文默认为1
+    if (nRecordNum != 1) {
         qDebug() << "packet num error!" << nRecordNum;
         return;
     }
 
-    for (int i = 0; i < nRecordNum; i++)
-    {
+    for (int i = 0; i < nRecordNum; i++) {
         //COMMPKT_MASTER
         masterName = QString(pMasterText);
         //COMMPKT_SEND_RECV
-        if (nPktDirection == PACKET_RECV)
-        {
+        if (nPktDirection == PACKET_RECV) {
             pktDirection = QString(COMMPKT_RECV);
-        }
-        else
-        {
+        } else {
             pktDirection = QString(COMMPKT_SEND);
         }
         //COMMPKT_TIME
@@ -365,8 +329,7 @@ void CommPktTab::displayReport(const QByteArray &buffer)
         pkt.insert(0, buf.data() + HEADNUMBER, buf.size() - HEADNUMBER);		//将报文插入QByteArray
         pkt = pkt.toHex();		//再将QByteArray里的ASCII数据转成16进制数据，长度扩大了一倍
 
-        for (int i = 0; i < pkt.size(); i += 2)
-        {
+        for (int i = 0; i < pkt.size(); i += 2) {
             const char cTmp1 = pkt.data()[i];
             const char cTmp2 = pkt.data()[i + 1];
             pktContent.append(QString("%1%2 ").arg(QString(cTmp1).toUpper()).arg(QString(cTmp2).toUpper()));

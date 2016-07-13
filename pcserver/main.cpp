@@ -6,13 +6,25 @@
 #include <QMessageBox>
 #include <QDebug>
 
+#if defined(__APPLE__) || defined(MACOSX)
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glu.h>
+    #include <GLUT/glut.h>
+#else
+    #include <Windows.h>
+    #include <GL/gl.h>
+    #include <GL/glu.h>
+    //#include "GLUT/glut.h"//depends on where you put GLUT
+#endif
+
+
 //#ifndef Q_OS_WIN
 //#include "3rdparty/eventdispatcher_libev/eventdispatcher_libev.h"
 //#endif
 
 #include "dbmysql.h"
-//#include "mainwindow.h"
-#include "logindialog.h"
+#include "mainwindow.h"
+//#include "logindialog.h"
 //#include "networkinformation.h"
 #include "utils.h"
 #include "xmlparser.h"
@@ -21,11 +33,12 @@ SettingInfo settingInfo;    // 全局的系统配置定义
 SessionInfo sessionInfo;    // 全局的会话定义
 DbMySQL db;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     settingInfo.sysName = PCSERVER_NAME;
     settingInfo.sysVersion = PCSERVER_VERSION;
     settingInfo.sysDate = PCSERVER_DATE;
+
+//    glutInit(&argc, argv);
 
     // 处理消息
 //    qInstallMessageHandler(Utils::MessageHandler);
@@ -61,11 +74,12 @@ int main(int argc, char *argv[])
     splash->setPixmap(QPixmap(":/res/images/logo.png"));
     splash->show();
 
-//    MainWindow *mainwindow = new MainWindow;
-    LoginDialog *login = new LoginDialog;
-    Utils::Sleep(1000);// sleep 1s for start logo
-    login->show();
-//    mainwindow->show();
+//    LoginDialog *login = new LoginDialog;
+//    Utils::Sleep(1000);// sleep 1s for start logo
+//    login->show();
+
+    MainWindow *mainwindow = new MainWindow;
+    mainwindow->show();
 
 //    NetworkInformation *network = new NetworkInformation;
 //    network->show();
@@ -75,8 +89,8 @@ int main(int argc, char *argv[])
 //    qDebug() << newStr << " " << QTextCodec::codecForName("GBK")->toUnicode(QByteArray::fromBase64(newStr.toLocal8Bit()));;
 
     // 关闭启动画面
-//    splash->finish(mainwindow);
-    splash->finish(login);
+    splash->finish(mainwindow);
+//    splash->finish(login);
     delete splash;
 
     return app.exec();

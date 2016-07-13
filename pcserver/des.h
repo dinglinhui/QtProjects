@@ -5,22 +5,19 @@
  *
  * 该类是DES和3DES算法类
  */
-class CDES
-{
+class CDES {
 public:
     CDES();
     virtual ~CDES();
 
     //加密解密
-    enum
-    {
+    enum {
         ENCRYPT	= 0,	//! 加密
         DECRYPT,			//! 解密
     };
 
     //DES算法的模式
-    enum
-    {
+    enum {
         ECB		=	0,	//! ECB模式
         CBC				//! CBC模式
     };
@@ -28,8 +25,7 @@ public:
     typedef bool    (*PSubKey)[16][48];
 
     //Pad填充的模式
-    enum
-    {
+    enum {
         PAD_ISO_1 =	0,	//! ISO_1填充：数据长度不足8比特的倍数，以0x00补足，如果为8比特的倍数，补8个0x00
         PAD_ISO_2,		//! ISO_2填充：数据长度不足8比特的倍数，以0x80,0x00..补足，如果为8比特的倍数，补0x80,0x00..0x00
         PAD_PKCS_7		//! PKCS7填充：数据长度除8余数为n,以(8-n)补足为8的倍数

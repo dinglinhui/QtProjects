@@ -8,8 +8,8 @@ LogDock::LogDock(const QString &title, QWidget *parent) :
     QDockWidget(title, parent),
     //    m_pLogTxt(new QTextEdit(this)),
     m_pTableView(new QTableView(this)),
-    m_pModel(new ProxyModel(this))
-{
+    m_pModel(new ProxyModel(this)) {
+
     //    this->setWidget(m_pLogTxt);
     m_pModel->setSourceModel(createModel(this));
     m_pTableView->setModel(m_pModel);
@@ -28,13 +28,11 @@ LogDock::LogDock(const QString &title, QWidget *parent) :
     this->setWidget(m_pTableView);
 }
 
-LogDock::~LogDock()
-{
+LogDock::~LogDock() {
 
 }
 
-QAbstractItemModel * LogDock::createModel(QObject *parent)
-{
+QAbstractItemModel * LogDock::createModel(QObject *parent) {
     QStandardItemModel *model = new QStandardItemModel(0, LOG_MAX_NUM, parent);
 
     model->setHeaderData(LOG_DATE, Qt::Horizontal, LOGPRINT_DATE);
@@ -43,8 +41,7 @@ QAbstractItemModel * LogDock::createModel(QObject *parent)
     return model;
 }
 
-void LogDock::appendLog(const QString context)
-{
+void LogDock::appendLog(const QString context) {
     QString timeStr = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss zzz"); //设置显示格式
 
     int index = m_pModel->rowCount();

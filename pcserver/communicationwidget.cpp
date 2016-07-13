@@ -6,8 +6,7 @@
 CommunicationWidget::CommunicationWidget(QWidget *parent) :
     QWidget(parent),
     commTree(new CommunicationTree(this)),
-    commTable(new CommunicationTable(this))
-{
+    commTable(new CommunicationTable(this)) {
     QSplitter *splitter = new QSplitter;
     splitter->addWidget(commTree);
     splitter->addWidget(commTable);
@@ -19,17 +18,14 @@ CommunicationWidget::CommunicationWidget(QWidget *parent) :
     this->setLayout(layout);
 }
 
-CommunicationWidget::~CommunicationWidget()
-{
+CommunicationWidget::~CommunicationWidget() {
 
 }
 
-CommunicationTree * CommunicationWidget::getCommunicationTree()
-{
+CommunicationTree * CommunicationWidget::getCommunicationTree() {
     return commTree;
 }
 
-CommunicationTable * CommunicationWidget::getCommunicationTable()
-{
+CommunicationTable * CommunicationWidget::getCommunicationTable() {
     return commTable;
 }

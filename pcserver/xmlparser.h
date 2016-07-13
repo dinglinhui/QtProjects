@@ -8,8 +8,7 @@
 #include "pcdefs.h"
 using namespace std;
 
-class XmlParser: public QObject
-{
+class XmlParser: public QObject {
     Q_OBJECT
 public:
     XmlParser();

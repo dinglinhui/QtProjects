@@ -6,8 +6,7 @@
 #include "proxymodel.h"
 #include "pcdefs.h"
 
-class LogDock : public QDockWidget
-{
+class LogDock : public QDockWidget {
 public:
     explicit LogDock(const QString &title, QWidget *parent = 0);
     ~LogDock();

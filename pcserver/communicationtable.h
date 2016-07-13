@@ -8,8 +8,7 @@
 #include "proxymodel.h"
 #include "pcdefs.h"
 
-class CommunicationTable : public QTableView
-{
+class CommunicationTable : public QTableView {
     Q_OBJECT
 public:
     explicit CommunicationTable(QWidget *parent = 0);

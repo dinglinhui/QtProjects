@@ -5,21 +5,18 @@
 #include <QVariant>
 #include <QSortFilterProxyModel>
 
-class ProxyModel: public QSortFilterProxyModel
-{
+class ProxyModel: public QSortFilterProxyModel {
     Q_OBJECT
 
 public:
     ProxyModel(QObject *parent = 0);
 
-    QDate filterMinimumDate() const
-    {
+    QDate filterMinimumDate() const {
         return minDate;
     }
     void setFilterMinimumDate(const QDate &date);
 
-    QDate filterMaximumDate() const
-    {
+    QDate filterMaximumDate() const {
         return maxDate;
     }
     void setFilterMaximumDate(const QDate &date);

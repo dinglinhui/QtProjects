@@ -7,8 +7,7 @@
 #include "proxymodel.h"
 #include "pcdefs.h"
 
-class ExaminationTable : public QTableView
-{
+class ExaminationTable : public QTableView {
     Q_OBJECT
 public:
     explicit ExaminationTable(QWidget *parent = 0);

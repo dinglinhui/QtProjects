@@ -226,5 +226,6 @@
         <file>res/images/256/zoom.png</file>
         <file>res/images/login.jpg</file>
         <file>res/images/background.jpg</file>
+        <file>res/images/fullscreenIcon.png</file>
     </qresource>
 </RCC>

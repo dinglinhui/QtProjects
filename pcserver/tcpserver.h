@@ -7,8 +7,7 @@
 
 //继承QTCPSERVER以实现多线程TCPScoket的服务器。
 //如果socket的信息处理直接处理的话，很多新建的信号和槽是用不到的
-class TcpServer : public QTcpServer
-{
+class TcpServer : public QTcpServer {
     Q_OBJECT
 public:
     explicit TcpServer(QObject *parent = 0,int numConnections = 10000);

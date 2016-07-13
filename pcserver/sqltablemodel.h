@@ -3,8 +3,7 @@
 
 #include <QSqlTableModel>
 
-class SqlTableModel : public QSqlTableModel
-{
+class SqlTableModel : public QSqlTableModel {
     Q_OBJECT
 public:
     SqlTableModel();

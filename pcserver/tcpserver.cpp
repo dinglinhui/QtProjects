@@ -2,34 +2,30 @@
 #include "threadhandle.h"
 
 TcpServer::TcpServer(QObject *parent,int numConnections) :
-    QTcpServer(parent)
-{
+    QTcpServer(parent) {
     m_pParent = parent;
-    tcpClient = new  QHash<int,TcpSocket *>;
+    tcpClient = new QHash<int,TcpSocket *>;
     setMaxPendingConnections(numConnections);
 }
 
-TcpServer::~TcpServer()
-{
+TcpServer::~TcpServer() {
     emit this->sentDisConnect(-1);
     delete tcpClient;
 }
 
-void TcpServer::setMaxPendingConnections(int numConnections)
-{
+void TcpServer::setMaxPendingConnections(int numConnections) {
     this->QTcpServer::setMaxPendingConnections(numConnections);//调用Qtcpsocket函数，设置最大连接数，主要是使maxPendingConnections()依然有效
     this->maxConnections = numConnections;
 }
 
-QHash<int,TcpSocket *> * TcpServer::getTcpClient()
-{
+QHash<int,TcpSocket *> * TcpServer::getTcpClient() {
     return tcpClient;
 }
 
-void TcpServer::incomingConnection(qintptr socketDescriptor) //多线程必须在此函数里捕获新连接
-{
-    if (tcpClient->size() > maxPendingConnections())//继承重写此函数后，QTcpServer默认的判断最大连接数失效，自己实现
-    {
+//多线程必须在此函数里捕获新连接
+void TcpServer::incomingConnection(qintptr socketDescriptor) {
+    //继承重写此函数后，QTcpServer默认的判断最大连接数失效，自己实现
+    if (tcpClient->size() > maxPendingConnections()) {
         QTcpSocket tcp;
         tcp.setSocketDescriptor(socketDescriptor);
         tcp.disconnectFromHost();
@@ -49,15 +45,13 @@ void TcpServer::incomingConnection(qintptr socketDescriptor) //多线程必须�
     emit connectClient(socketDescriptor,ip,port);
 }
 
-void TcpServer::sockDisConnectSlot(int handle,const QString & ip, quint16 port, QThread * th)
-{
+void TcpServer::sockDisConnectSlot(int handle,const QString & ip, quint16 port, QThread * th) {
     tcpClient->remove(handle);//连接管理中移除断开连接的socket
     ThreadHandle::getClass().removeThread(th); //告诉线程管理类那个线程里的连接断开了
     emit sockDisConnect(handle,ip,port);
 }
 
-void TcpServer::clear()
-{
+void TcpServer::clear() {
     emit this->sentDisConnect(-1);
     ThreadHandle::getClass().clear();
     tcpClient->clear();

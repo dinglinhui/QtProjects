@@ -1,10 +1,8 @@
 #include "xmlparser.h"
 #include "utils.h"
 
-XmlParser::XmlParser()
-{
-    if(!QFile::exists(PCSERVER_CONFIG_FILE))
-    {
+XmlParser::XmlParser() {
+    if(!QFile::exists(PCSERVER_CONFIG_FILE)) {
         createXml(PCSERVER_CONFIG_FILE);
     }
 
@@ -20,8 +18,7 @@ XmlParser::XmlParser()
     }
 }
 
-XmlParser::~XmlParser()
-{
+XmlParser::~XmlParser() {
     dom->clear();
     localfile->close();
 
@@ -31,8 +28,7 @@ XmlParser::~XmlParser()
         delete dom, dom = nullptr;
 }
 
-void XmlParser::createXml(QString filename)
-{
+void XmlParser::createXml(QString filename) {
     QFile file(filename);
     file.open(QIODevice::ReadWrite);
 
@@ -70,15 +66,14 @@ void XmlParser::createXml(QString filename)
     file.close();
 }
 
-void XmlParser::createXml(QString filename, void *context)
-{
-    if (context == nullptr)
-    {
+void XmlParser::createXml(QString filename, void *context) {
+    if (context == nullptr) {
         qDebug() << "createXml context nullptr";
         createXml(filename);
         return;
     }
-    SERVER_INFO *pServer = (SERVER_INFO *) context;
+
+    ServerInfo *pServer = (ServerInfo *) context;
 
     QFile file(filename);
     file.open(QIODevice::ReadWrite);
@@ -118,27 +113,24 @@ void XmlParser::createXml(QString filename, void *context)
 }
 
 
-bool XmlParser::readXml(void *context, const QString &type)
-{
-    if (context == nullptr)
-    {
+bool XmlParser::readXml(void *context, const QString &type) {
+    if (context == nullptr) {
         qDebug() << "readXml context nullptr";
         return false;
     }
 
-    SERVER_INFO *pServer = (SERVER_INFO *) context;
+    ServerInfo *pServer = (ServerInfo *) context;
 
     QDomNodeList nodelist = dom->elementsByTagName(type);
-    if (nodelist.count() == 0)
-    {
+    if (nodelist.count() == 0) {
         qDebug() << type << " nodelist.count() == 0";
         return false;
     }
 
-    for(int i=0; i<nodelist.count(); i++){
+    for(int i=0; i<nodelist.count(); i++) {
         QDomNode node = nodelist.at(i);
         QDomNodeList itemlist = node.childNodes();
-        for(int j=0; j<itemlist.count(); j++){
+        for(int j=0; j<itemlist.count(); j++) {
             QDomNode mynode = itemlist.at(j);
             if(mynode.toElement().attribute(XML_ELEMENT_KEY) == XML_ELEMENT_IP_ADDRESS)
                 pServer->ipAddress = mynode.toElement().attribute(XML_ELEMENT_VALUE);
@@ -150,23 +142,24 @@ bool XmlParser::readXml(void *context, const QString &type)
     return true;
 }
 
-bool XmlParser::writeXml(void *context, const QString &type)
-{
+bool XmlParser::writeXml(void *context, const QString &type) {
     QFile::remove(PCSERVER_CONFIG_FILE);
     createXml(PCSERVER_CONFIG_FILE, context);
     return true;
 }
 
-QString XmlParser::getValue(const QString &key, const QString &type)
-{
+QString XmlParser::getValue(const QString &key, const QString &type) {
     QString result = "";
     QDomNodeList nodelist = dom->elementsByTagName(type);
-    for(int i=0; i<nodelist.count(); i++){
+
+    for(int i=0; i<nodelist.count(); i++) {
+
         QDomNode node = nodelist.at(i);
         QDomNodeList itemlist = node.childNodes();
-        for(int j=0; j<itemlist.count(); j++){
+        for(int j=0; j<itemlist.count(); j++) {
+
             QDomNode mynode = itemlist.at(j);
-            if(mynode.toElement().attribute(XML_ELEMENT_KEY) == key){
+            if(mynode.toElement().attribute(XML_ELEMENT_KEY) == key) {
                 result = mynode.toElement().attribute(XML_ELEMENT_VALUE);
                 break;
             }

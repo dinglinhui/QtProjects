@@ -7,8 +7,7 @@
 #include <QStandardItem>
 #include <QMouseEvent>
 
-class CommunicationTree: public QTreeView
-{
+class CommunicationTree: public QTreeView {
     Q_OBJECT
 public:
     explicit CommunicationTree(QWidget *parent = 0);

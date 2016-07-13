@@ -3,8 +3,7 @@
 
 #include <QWidget>
 
-class MainWidget : QWidget
-{
+class MainWidget : QWidget {
 public:
     explicit MainWidget(QWidget *parent = 0);
     ~MainWidget();

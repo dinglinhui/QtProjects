@@ -8,8 +8,7 @@
 #include <QNetworkInterface>
 
 NetworkInformation::NetworkInformation(QWidget *parent)
-    : QDialog(parent)
-{
+    : QDialog(parent) {
     nameLabel = new QLabel(tr("Name:"));
     nameEdit = new QLineEdit;
     nameLabel->setBuddy(nameEdit);
@@ -48,8 +47,7 @@ NetworkInformation::NetworkInformation(QWidget *parent)
 }
 
 //private slots
-void NetworkInformation::slotDetail()
-{
+void NetworkInformation::slotDetail() {
     QString detail = "";
     QList<QNetworkInterface> listNetwork = QNetworkInterface::allInterfaces();
     for(int i = 0; i < listNetwork.count(); i++) {

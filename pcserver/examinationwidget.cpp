@@ -9,8 +9,8 @@ extern DbMySQL db;
 ExaminationWidget::ExaminationWidget(QWidget *parent) :
     QWidget(parent),
     examTree(new ExaminationTree(this)),
-    examTable(new ExaminationTable(this))
-{
+    examTable(new ExaminationTable(this)) {
+
     QSplitter *splitter = new QSplitter;
     splitter->addWidget(examTree);
     splitter->addWidget(examTable);
@@ -28,8 +28,7 @@ ExaminationWidget::ExaminationWidget(QWidget *parent) :
     }
 }
 
-ExaminationWidget::~ExaminationWidget()
-{
+ExaminationWidget::~ExaminationWidget() {
     if(nullptr != examTree)
         delete examTree, examTree = nullptr;
 
@@ -37,7 +36,6 @@ ExaminationWidget::~ExaminationWidget()
         delete examTable, examTable = nullptr;
 }
 
-void ExaminationWidget::onTreeClicked(const QModelIndex &index)
-{
+void ExaminationWidget::onTreeClicked(const QModelIndex &index) {
     qDebug() << index.row();
 }

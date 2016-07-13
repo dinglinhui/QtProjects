@@ -6,30 +6,26 @@
 extern SessionInfo sessionInfo;
 extern SettingInfo settingInfo;
 
-DbMySQL::DbMySQL()
-{
+DbMySQL::DbMySQL() {
 
 }
 
-DbMySQL::~DbMySQL()
-{
+DbMySQL::~DbMySQL() {
 
 }
 
-bool DbMySQL::connectMySQL()
-{
+bool DbMySQL::connectMySQL() {
     QSqlDatabase db  = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
     db.setDatabaseName("db_pcserver");
     db.setUserName("root");
-    db.setPassword("root");
+    db.setPassword("dinglh1987");
     settingInfo.dbName = QString("db_pcserver");
     settingInfo.dbUserName = QString("root");
     settingInfo.dbPasswd = QString("root");
 
     //检测数据库是否链接成功
-    if(!db.open())
-    {
+    if(!db.open()) {
         bool isInput;
         QString ipInput = QInputDialog::getText(NULL, QObject::tr("连接数据库服务器"),
                                                 QObject::tr("请输入数据库服务器IP："), QLineEdit::Normal,
@@ -58,8 +54,41 @@ bool DbMySQL::connectMySQL()
     return true;
 }
 
-bool DbMySQL::getAdminInfo(const QString &adminId, const QString &passwd)
-{
+bool DbMySQL::getSystemInfo(const QString &adminId) {
+    QString strSql = QString("select tcp_port from tb_system " \
+                             "where admin_id = '%1'").arg(adminId);
+    qDebug() << strSql;
+    QSqlQuery query(strSql);
+    if (!query.isActive()) {
+        QMessageBox::warning(NULL, QObject::tr("数据库错误"), query.lastError().text());
+        return false;
+    }
+
+    if (!query.next()) {
+        return false;
+    } else {
+        sessionInfo.systemInfo.serverInfo.listenPort = query.value(0).toString();
+    }
+
+    return true;
+}
+
+bool DbMySQL::updateSystemInfo(const QString &adminId) {
+    QString strSql = QString("update tb_system set tcp_port = '%1' " \
+                             "where admin_id = '%2'").arg(sessionInfo.systemInfo.serverInfo.listenPort).arg(adminId);
+    qDebug() << strSql;
+    QSqlQuery query(strSql);
+    if (!query.isActive()) {
+        QMessageBox::warning(NULL, QObject::tr("数据库错误"), query.lastError().text());
+        return false;
+    } else {
+        qDebug() << "update table tcp_port successful";
+    }
+
+    return true;
+}
+
+bool DbMySQL::getAdminInfo(const QString &adminId, const QString &passwd) {
     QString strSql = QString("select admin_id, admin_name, admin_level, admin_passwd, admin_logindate from tb_admin " \
                              "where admin_id = '%1' and admin_passwd = '%2'").arg(adminId).arg(passwd);
     qDebug() << strSql;
@@ -82,8 +111,7 @@ bool DbMySQL::getAdminInfo(const QString &adminId, const QString &passwd)
     return true;
 }
 
-bool DbMySQL::updateAdminInfo()
-{
+bool DbMySQL::updateAdminInfo() {
     QString strSql = QString("update tb_admin set admin_logindate = '%1' " \
                              "where admin_id = '%2'").arg(sessionInfo.sessionId.adminLoginDate).arg(sessionInfo.sessionId.adminId);
     qDebug() << strSql;
@@ -98,8 +126,7 @@ bool DbMySQL::updateAdminInfo()
     return true;
 }
 
-bool DbMySQL::getExamInfo(QList<QStringList> &exams)
-{
+bool DbMySQL::getExamInfo(QList<QStringList> &exams) {
     QString strSql = QString("select exam_id, exam_date, exam_status, exam_name from tb_exam");
     qDebug() << strSql;
     QSqlQuery query(strSql);
@@ -124,8 +151,7 @@ bool DbMySQL::getExamInfo(QList<QStringList> &exams)
     return true;
 }
 
-bool DbMySQL::createExamTable()
-{
+bool DbMySQL::createExamTable() {
     QString info = QDate::currentDate().toString("yyyyMM");
     const QString tb_user = QString("tb_user_%1").arg(info);
     const QString tb_user_exam = QString("tb_user_exam_%1").arg(info);
@@ -147,7 +173,7 @@ bool DbMySQL::createExamTable()
 
     QList<QString> tables;
     if(showTables(QString("tb_user%\\_%1").arg(info), tables)) {
-        if(!tables.contains(tb_user)){
+        if(!tables.contains(tb_user)) {
             if(!createTable(creatUserSql, tb_user)) {
                 return false;
             }
@@ -182,8 +208,7 @@ bool DbMySQL::createExamTable()
     return true;
 }
 
-bool DbMySQL::createTable(const QString &strSql, const QString &tablename)
-{
+bool DbMySQL::createTable(const QString &strSql, const QString &tablename) {
     QSqlQuery query(strSql);
     qDebug() << strSql;
     if (!query.isActive()) {
@@ -195,8 +220,7 @@ bool DbMySQL::createTable(const QString &strSql, const QString &tablename)
     return true;
 }
 
-bool DbMySQL::showTables(const QString &tablename, QList<QString>& tables)
-{
+bool DbMySQL::showTables(const QString &tablename, QList<QString>& tables) {
     QString strSql = QString("SHOW TABLES LIKE '%1'").arg(tablename);
     qDebug() << strSql;
     QSqlQuery query(strSql);

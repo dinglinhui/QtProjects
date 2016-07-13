@@ -5,22 +5,23 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-class DbMySQL
-{
+class DbMySQL {
 public:
     explicit DbMySQL();
     ~DbMySQL();
 
-//signals:
-//    void logSignal(const QString &);
+    //signals:
+    //    void logSignal(const QString &);
 
 public:
-    // 连接数据库
     bool connectMySQL();
-    // 从数据库获取系统设置信息
+    // tb_system
+    bool getSystemInfo(const QString &adminId);
+    bool updateSystemInfo(const QString &adminId);
+    // tb_admin
     bool getAdminInfo(const QString &adminId, const QString &passwd);
     bool updateAdminInfo();
-    // 从数据库获取考试信息
+    // tb_exam
     bool getExamInfo(QList<QStringList> &exams);
     // 创建考试相关信息表
     bool createExamTable();

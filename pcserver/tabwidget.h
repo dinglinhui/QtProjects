@@ -8,11 +8,11 @@
 #include "pcdefs.h"
 #include "welcomewidget.h"
 #include "mainwidget.h"
+#include "graphwidget.h"
 #include "examinationwidget.h"
 #include "communicationwidget.h"
 
-class TabWidget: public QTabWidget
-{
+class TabWidget: public QTabWidget {
     Q_OBJECT
 
 public:
@@ -20,6 +20,7 @@ public:
     ~TabWidget();
 
 public:
+    void addGraphTab();
     void addConnManageTab();
     void addExamManageTab();
 
@@ -31,6 +32,7 @@ public slots:
 
 private:
     WelcomeWidget *welcomWidget = nullptr;
+    GraphWidget *graphWidget = nullptr;
     ExaminationWidget *examinationWidget = nullptr;
     CommunicationWidget *communicationWidget = nullptr;
 };

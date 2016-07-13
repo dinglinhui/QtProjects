@@ -6,18 +6,15 @@
 #include <QFile>
 #include "utils.h"
 
-Utils::Utils()
-{
+Utils::Utils() {
 
 }
 
-Utils::~Utils()
-{
+Utils::~Utils() {
 
 }
 
-void Utils::Sleep(unsigned int msec)
-{
+void Utils::Sleep(unsigned int msec) {
     QTime dieTime = QTime::currentTime().addMSecs(msec);
 
     while( QTime::currentTime() < dieTime ) {
@@ -25,8 +22,7 @@ void Utils::Sleep(unsigned int msec)
     }
 }
 
-void Utils::MessageHandler(QtMsgType type, const QMessageLogContext &context,const QString & msg)
-{
+void Utils::MessageHandler(QtMsgType type, const QMessageLogContext &context,const QString & msg) {
     QString txt;
     switch (type) {
     //调试信息提示

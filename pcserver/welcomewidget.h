@@ -11,8 +11,7 @@ class QImage;
 class QVBoxLayout;
 QT_END_NAMESPACE
 
-class WelcomeWidget : public QWidget
-{
+class WelcomeWidget : public QWidget {
     Q_OBJECT
 public:
     WelcomeWidget(QWidget *parent = 0);
@@ -26,8 +25,8 @@ signals:
     void sendDetails(QString name, QString address);
 
 private:
-//    QLabel *welcomLabel;
-//    QVBoxLayout *mainLayout;
+    //    QLabel *welcomLabel;
+    //    QVBoxLayout *mainLayout;
     QImage _image;
 };
 

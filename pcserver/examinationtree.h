@@ -8,8 +8,7 @@
 #include <QStandardItem>
 #include "pcdefs.h"
 
-class ExaminationTree : public QTreeView
-{
+class ExaminationTree : public QTreeView {
     Q_OBJECT
 public:
     explicit ExaminationTree(QWidget *parent = 0);

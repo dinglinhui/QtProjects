@@ -16,8 +16,7 @@ class QFileInfo;
 class QTabWidget;
 QT_END_NAMESPACE
 
-class TransPage: public QWidget
-{
+class TransPage: public QWidget {
 public:
     TransPage(QWidget *parent = 0);
 
@@ -28,8 +27,7 @@ private:
     QLineEdit *m_pTcpPortEdit;
 };
 
-class GeneralTab: public QWidget
-{
+class GeneralTab: public QWidget {
     Q_OBJECT
 
 public:
@@ -47,30 +45,26 @@ private:
     TransPage *m_pTransPage;
 };
 
-class ReservePage: public QWidget
-{
+class ReservePage: public QWidget {
 public:
     ReservePage(QWidget *parent = 0);
 };
 
-class PermissionsTab: public QWidget
-{
+class PermissionsTab: public QWidget {
     Q_OBJECT
 
 public:
     PermissionsTab(QWidget *parent = 0);
 };
 
-class ApplicationsTab: public QWidget
-{
+class ApplicationsTab: public QWidget {
     Q_OBJECT
 
 public:
     ApplicationsTab(QWidget *parent = 0);
 };
 
-class ConfigDialog: public QDialog
-{
+class ConfigDialog: public QDialog {
     Q_OBJECT
 
 public:

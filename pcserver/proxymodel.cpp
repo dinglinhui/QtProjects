@@ -3,25 +3,21 @@
 #include "proxymodel.h"
 
 ProxyModel::ProxyModel(QObject *parent) :
-    QSortFilterProxyModel(parent)
-{
+    QSortFilterProxyModel(parent) {
 }
 
-void ProxyModel::setFilterMinimumDate(const QDate &date)
-{
+void ProxyModel::setFilterMinimumDate(const QDate &date) {
     minDate = date;
     invalidateFilter();
 }
 
-void ProxyModel::setFilterMaximumDate(const QDate &date)
-{
+void ProxyModel::setFilterMaximumDate(const QDate &date) {
     maxDate = date;
     invalidateFilter();
 }
 
 bool ProxyModel::filterAcceptsRow(int sourceRow,
-                               const QModelIndex &sourceParent) const
-{
+                               const QModelIndex &sourceParent) const {
     QModelIndex index0 = sourceModel()->index(sourceRow, 0, sourceParent);
     QModelIndex index1 = sourceModel()->index(sourceRow, 1, sourceParent);
     QModelIndex index2 = sourceModel()->index(sourceRow, 2, sourceParent);
@@ -31,17 +27,13 @@ bool ProxyModel::filterAcceptsRow(int sourceRow,
             && dateInRange(sourceModel()->data(index2).toDate());
 }
 
-bool ProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
+bool ProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const {
     QVariant leftData = sourceModel()->data(left);
     QVariant rightData = sourceModel()->data(right);
 
-    if (leftData.type() == QVariant::DateTime)
-    {
+    if (leftData.type() == QVariant::DateTime) {
         return leftData.toDateTime() < rightData.toDateTime();
-    }
-    else
-    {
+    } else {
         QRegExp *emailPattern = new QRegExp("([\\w\\.]*@[\\w\\.]*)");
 
         QString leftString = leftData.toString();
@@ -56,8 +48,7 @@ bool ProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) con
     }
 }
 
-bool ProxyModel::dateInRange(const QDate &date) const
-{
+bool ProxyModel::dateInRange(const QDate &date) const {
     return (!minDate.isValid() || date > minDate)
             && (!maxDate.isValid() || date < maxDate);
 }

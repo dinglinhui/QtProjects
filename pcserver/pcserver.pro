@@ -7,7 +7,8 @@ QT          += core \
             xml \
             network \
             sql \
-            printsupport
+            printsupport \
+            opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -42,7 +43,13 @@ SOURCES += \
     examinationtable.cpp \
     examinationtree.cpp \
     examinationwidget.cpp \
-    sqltablemodel.cpp
+    sqltablemodel.cpp \
+    graphwidget.cpp \
+    graphtree.cpp \
+    glwidget.cpp \
+    model.cpp \
+    primedialog.cpp \
+    camera.cpp
 
 HEADERS += \
     borderlayout.h \
@@ -73,9 +80,20 @@ HEADERS += \
     examinationtable.h \
     examinationtree.h \
     examinationwidget.h \
-    sqltablemodel.h
+    sqltablemodel.h \
+    graphwidget.h \
+    graphtree.h \
+    glwidget.h \
+    model/teapot.h \
+    model.h \
+    primedialog.h \
+    camera.h
 
 RESOURCES += pcserver.qrc
 
 include($$PWD/3rdparty/qtxlsx/src/xlsx/qtxlsx.pri)
 unix:include($$PWD/3rdparty/eventdispatcher_libev/eventdispatcher_libev.pri)
+
+DISTFILES += \
+    model/mermaid.obj \
+    model/mermaid.mtl
