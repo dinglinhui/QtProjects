@@ -4,34 +4,28 @@
 TabWidget::TabWidget(QWidget *parent) :
     QTabWidget(parent),
     welcomWidget(new WelcomeWidget),
-    graphWidget(new GraphWidget),
     examinationWidget(new ExaminationWidget),
     communicationWidget(new CommunicationWidget) {
 
-    this->addTab(welcomWidget, QIcon(":/res/images/home.png"), PCSERVER_WELCOME);
-    connect(this, SIGNAL(tabCloseRequested(int)), this, SLOT(removeSubTab(int)));
-
     this->setCurrentIndex(0);
-    this->setTabsClosable(false);
+    this->setTabsClosable(true);
     this->setMovable(true);
-    this->setTabBarAutoHide(true);
+    this->setTabBarAutoHide(false);
+    connect(this, SIGNAL(tabCloseRequested(int)), this, SLOT(removeSubTab(int)));
 }
 
 TabWidget::~TabWidget() {
     if(nullptr != welcomWidget)
         delete welcomWidget, welcomWidget = nullptr;
-    if(nullptr != graphWidget)
-        delete graphWidget, graphWidget = nullptr;
     if(nullptr != examinationWidget)
         delete examinationWidget, examinationWidget = nullptr;
     if(nullptr != communicationWidget)
         delete communicationWidget, communicationWidget = nullptr;
 }
 
-
-void TabWidget::addGraphTab() {
-    this->addTab(graphWidget, QIcon(":res/images/256/trojan2.png"), GRAPH_CONTROL);
-    this->setCurrentWidget(graphWidget);
+void TabWidget::addWelcomeTab() {
+    this->addTab(welcomWidget, QIcon(":/res/images/home.png"), PCSERVER_WELCOME);
+    this->setCurrentWidget(welcomWidget);
 }
 
 void TabWidget::addConnManageTab() {
@@ -63,4 +57,5 @@ void TabWidget::onSocketDisConnect(const int socketDescriptor, const QString & i
 
 void TabWidget::removeSubTab(int index) {
     this->removeTab(index);
+    this->setCurrentIndex(0);
 }

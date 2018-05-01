@@ -43,7 +43,7 @@ void ExaminationTree::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-void ExaminationTree::onTreeCustomContextMenuRequested(QPoint pos) {
+void ExaminationTree::onTreeCustomContextMenuRequested(QPoint) {
     treePopMenu->addAction(callAction);
 
     treePopMenu->exec(QCursor::pos());

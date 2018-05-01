@@ -11,97 +11,99 @@
 #define PCSERVER_DATE           QDate::currentDate().toString("yyyyMMdd")
 #define PCSERVER_HOMEDIR        QDir::currentPath()
 #define PCSERVER_CONFIG_FILE    PCSERVER_HOMEDIR.append("/pcserver.config")
-#define PCSERVER_AUTHOR         QStringLiteral("丁林辉")
+#define PCSERVER_AUTHOR         QStringLiteral("Kevin Ding")
 #define PCSERVER_EMAIL          QStringLiteral("dinglinhui@hotmail.com")
 #define PCSERVER_CONTEXT  		QStringLiteral("%1-%2-%3").arg(PCSERVER_NAME).arg(PCSERVER_VERSION).arg(PCSERVER_DATE)
 //
 #define WELCOME_CONTEXT  		QStringLiteral("%1-%2-%3").arg(PCSERVER_NAME).arg(PCSERVER_VERSION).arg(PCSERVER_DATE)
-#define PCSERVER_WELCOME  		QStringLiteral("欢迎首页")
-#define PCSERVER_READY  		QStringLiteral("准备")
-#define PCSERVER_ADMIN          QStringLiteral("当前用户:")
-#define ADMIN_LOGIN_DATE        QStringLiteral("登录时间:")
-#define ADMIN_LAST_LOGIN_DATE   QStringLiteral("上次登录:")
-#define PCSERVER_FILE_SAVED 	QStringLiteral("文件已保存")
-#define GENERAL_CONFIG  		QStringLiteral("通用配置")
-#define SYSTEM_CONFIG           QStringLiteral("系统配置")
-#define APPLICATION_CONFIG  	QStringLiteral("应用配置")
+#define PCSERVER_WELCOME  		QStringLiteral("WELCOME")
+#define PCSERVER_READY  		QStringLiteral("READY")
+#define PCSERVER_ADMIN          QStringLiteral("CURRENT USER:")
+#define ADMIN_LOGIN_DATE        QStringLiteral("LOGIN DATETIME:")
+#define ADMIN_LAST_LOGIN_DATE   QStringLiteral("LAST LOGIN DATETIME")
+#define PCSERVER_FILE_SAVED 	QStringLiteral("FILE SAVED")
+#define GENERAL_CONFIG  		QStringLiteral("GENERAL CONFIG")
+#define SYSTEM_CONFIG           QStringLiteral("SYSTEM CONFIG")
+#define APPLICATION_CONFIG  	QStringLiteral("APPLICATION CONFIG")
 
-#define RTDB_TEST  				QStringLiteral("实时库测试")
-#define RTDB_DATAINFO  			QStringLiteral("单点信息")
+#define RTDB_TEST  				QStringLiteral("RTDB TEST")
+#define RTDB_DATAINFO  			QStringLiteral("RTDB DATAINFO")
 
-#define MENU_SERVICE  			QStringLiteral("服务")
-#define MENU_FUNCTION  			QStringLiteral("功能")
-#define MENU_INTERFACE  		QStringLiteral("界面")
-#define MENU_HELP  				QStringLiteral("帮助")
+#define MENU_SERVICE  			QStringLiteral("Service")
+#define MENU_FUNCTION  			QStringLiteral("Function")
+#define MENU_INTERFACE  		QStringLiteral("Interface")
+#define MENU_HELP  				QStringLiteral("Help")
 //
-#define PCSERVER_CONFIG         QStringLiteral("PCServer配置")
-#define COMMUNICATION_CONFIG  	QStringLiteral("通信配置")
-#define COMMUNICATION_PACKET  	QStringLiteral("通信报文")
-#define DATABASE_CONFIG         QStringLiteral("数据库配置")
-#define ROLLING_START  			QStringLiteral("开始滚动")
-#define ROLLING_STOP  			QStringLiteral("停止滚动")
-#define RTDB_TYPE  				QStringLiteral("实时库类型")
-#define RTDB_DATA  				QStringLiteral("实时库点表")
-#define RTDB_REFRESH_ALL  		QStringLiteral("查全表")
-#define RTDB_REFRESH_SINGLE  	QStringLiteral("查单点")
-#define RTDB_SAVE  				QStringLiteral("保存实时库")
-#define EXAMINATION_MANAGE      QStringLiteral("考试管理")
-#define COMMUNICATION_MANAGE    QStringLiteral("通信管理")
-#define GRAPH_CONTROL           QStringLiteral("图形控制")
-#define PRIME_TEST              QStringLiteral("质数测试")
-#define EXAM_LIST               QStringLiteral("考试场次")
-#define SOE_BUFFER              QStringLiteral("SOE缓存")
-#define FULL_SCREEN      		QStringLiteral("全屏显示")
-#define PCSERVER_ABOUT  		QStringLiteral("关于PCServer")
-#define PCSERVER_QUIT  			QStringLiteral("退出")
+#define PCSERVER_CONFIG         QStringLiteral("PCServer CONFIG")
+#define COMMUNICATION_CONFIG  	QStringLiteral("CONFIG")
+#define COMMUNICATION_PACKET  	QStringLiteral("PACKET")
+#define DATABASE_CONFIG         QStringLiteral("DATABASE CONFIG")
+#define ROLLING_START  			QStringLiteral("ROLLING START")
+#define ROLLING_STOP  			QStringLiteral("ROLLING STOP")
+#define RTDB_TYPE  				QStringLiteral("RTDB Type")
+#define RTDB_DATA  				QStringLiteral("RTDB Data")
+#define RTDB_REFRESH_ALL  		QStringLiteral("REFRESH ALL")
+#define RTDB_REFRESH_SINGLE  	QStringLiteral("REFRESH SINGLE")
+#define RTDB_SAVE  				QStringLiteral("Save RTDB")
+#define EXAMINATION_MANAGE      QStringLiteral("Examination")
+#define COMMUNICATION_MANAGE    QStringLiteral("Communication")
+#define GRAPH_CONTROL           QStringLiteral("Graph")
+#define PRIME_TEST              QStringLiteral("Prime")
+#define EXAM_LIST               QStringLiteral("Exam List")
+#define SOE_BUFFER              QStringLiteral("SOE Buffer")
+#define FULL_SCREEN      		QStringLiteral("Full Screen")
+#define PCSERVER_ABOUT  		QStringLiteral("About PCServer")
+#define PCSERVER_QUIT  			QStringLiteral("Quit")
 #define ABOUT_CONTEXT           QStringLiteral("<i>PCServer</i> is high performance communication application." \
-    "<br/><i>V1.0.0.0</i>: Build GUI Framework using Qt5.4 ." \
+    "<br/><i>V1.0.0.0</i>: Build GUI Framework using Qt5." \
     "<br/><i>V2.0.1.0</i>: Added Communication Module." \
-    "<br/><br/>丁林辉 Reserved <b>dinglinhui@hotmail.com</b>")
-#define COMMUNICATION_FUNCTION      QStringLiteral("通道功能")
-#define COMMUNICATION_CONNECT  		QStringLiteral("连接")
-#define COMMUNICATION_DISCONNECT  	QStringLiteral("断开连接")
-#define COMMUNICATION_CALL          QStringLiteral("召唤转发表")
-#define TRANSMIT_PRINT              QStringLiteral("打印转发表")
-#define TRANSMIT_EXPORT_EXCEL       QStringLiteral("导出Excel")
-#define TRANSMIT_EXPORT_CSV         QStringLiteral("导出CSV")
-//
-#define COMMUNICATION_IP            QStringLiteral("IP地址：")
-#define COMMUNICATION_LISTENPORT  	QStringLiteral("监听端口：")
-#define COMMUNICATION_SRCPORT       QStringLiteral("源端口：")
-#define COMMUNICATION_DESTPORT      QStringLiteral("目的端口：")
-#define COMMUNICATION_TCPPORT       QStringLiteral("转发表端口：")
+    "<br/><i>V3.0.0.0</i>: refactor Application Architecture." \
+    "<br/><br/>Kevin Ding Reserved <b>dinglinhui@hotmail.com</b>")
 
-#define LOGPRINT_HEADER             QStringLiteral("日志打印")
-#define LOGPRINT_DATE               QStringLiteral("日期")
-#define LOGPRINT_CONTEXT            QStringLiteral("日志内容")
+#define COMMUNICATION_FUNCTION      QStringLiteral("Communication")
+#define COMMUNICATION_CONNECT  		QStringLiteral("Connect")
+#define COMMUNICATION_DISCONNECT  	QStringLiteral("Disconnect")
+#define COMMUNICATION_CALL          QStringLiteral("Call Transmit")
+#define TRANSMIT_PRINT              QStringLiteral("Print Transmit Table")
+#define TRANSMIT_EXPORT_EXCEL       QStringLiteral("Export Excel")
+#define TRANSMIT_EXPORT_CSV         QStringLiteral("Export CSV")
 //
-#define DATATYPE_INT                QStringLiteral("整型")
-#define DATATYPE_FLOAT              QStringLiteral("浮点型")
-#define DATATYPE_STRING 			QStringLiteral("字符串")
+#define COMMUNICATION_IP            QStringLiteral("IP Address")
+#define COMMUNICATION_LISTENPORT  	QStringLiteral("Listening port")
+#define COMMUNICATION_SRCPORT       QStringLiteral("Src Port")
+#define COMMUNICATION_DESTPORT      QStringLiteral("Dest Port:")
+#define COMMUNICATION_TCPPORT       QStringLiteral("Transmit Port:")
 
-#define COMMPKT_PACKET_ANALYZE      QStringLiteral("报文分析")
-#define COMMPKT_SYSTEM_LOG          QStringLiteral("系统日志")
-#define COMMPKT_SEND                QStringLiteral("发送")
-#define COMMPKT_RECV                QStringLiteral("接收")
+#define LOGPRINT_HEADER             QStringLiteral("Log")
+#define LOGPRINT_DATE               QStringLiteral("Date")
+#define LOGPRINT_CONTEXT            QStringLiteral("Content")
 //
-#define QUIT_TITLE                  QStringLiteral("退出%1%2").arg(PCSERVER_NAME).arg("?")
-#define QUIT_TEXT                   QStringLiteral("确定要退出%1%2").arg(PCSERVER_NAME).arg("?")
-#define CALCULATE                   QStringLiteral("计算")
-#define CONFIRM                     QStringLiteral("确定")
-#define CANCEL                      QStringLiteral("取消")
-#define YES                         QStringLiteral("是")
-#define NO                          QStringLiteral("否")
-#define CLOSE                       QStringLiteral("关闭")
+#define DATATYPE_INT                QStringLiteral("Integer")
+#define DATATYPE_FLOAT              QStringLiteral("Float")
+#define DATATYPE_STRING 			QStringLiteral("String")
+
+#define COMMPKT_PACKET_ANALYZE      QStringLiteral("Analyse Packet")
+#define COMMPKT_SYSTEM_LOG          QStringLiteral("Sysem Log")
+#define COMMPKT_SEND                QStringLiteral("Send")
+#define COMMPKT_RECV                QStringLiteral("Recv")
+//
+#define QUIT_TITLE                  QStringLiteral("Quit %1%2").arg(PCSERVER_NAME).arg("?")
+#define QUIT_TEXT                   QStringLiteral("Quit %1%2").arg(PCSERVER_NAME).arg("?")
+#define CALCULATE                   QStringLiteral("calculate")
+#define CONFIRM                     QStringLiteral("Confirm")
+#define CANCEL                      QStringLiteral("Cancel")
+#define YES                         QStringLiteral("Yes")
+#define NO                          QStringLiteral("No")
+#define CLOSE                       QStringLiteral("Close")
 
 //
-#define COMMPKT_POPMENU_CLEAR			QStringLiteral("清空报文")
-#define COMMPKT_POPMENU_SAVEPACKET		QStringLiteral("保存报文")
-#define COMMPKT_POPMENU_ANALYZE			QStringLiteral("分析报文")
+#define COMMPKT_POPMENU_CLEAR			QStringLiteral("clear")
+#define COMMPKT_POPMENU_SAVEPACKET		QStringLiteral("save")
+#define COMMPKT_POPMENU_ANALYZE			QStringLiteral("analyse")
 //
-#define RTDBINFO_POPMENU_REFRESHALL		QStringLiteral("查全表")
-#define RTDBINFO_POPMENU_REFRESHSINGLE	QStringLiteral("查单点")
-#define RTDBINFO_POPMENU_SAVERTDB		QStringLiteral("保存修改")
+#define RTDBINFO_POPMENU_REFRESHALL		QStringLiteral("refresh all")
+#define RTDBINFO_POPMENU_REFRESHSINGLE	QStringLiteral("refresh single")
+#define RTDBINFO_POPMENU_SAVERTDB		QStringLiteral("save RTDB")
 //
 #define XML_ELEMENT_CONFIGURATION       QStringLiteral("configuration")
 #define XML_ELEMENT_SERVER              QStringLiteral("server")
@@ -113,10 +115,10 @@
 #define XML_ELEMENT_IP_DEFAULT          QStringLiteral("127.0.0.1")
 #define XML_ELEMENT_PORT_DEFAULT        QStringLiteral("16011")
 //
-#define CHANNEL_MAX    		1024                //最大通道个数
-#define IED_MAX             4                   //最大装置个数
-#define HEADNUMBER    		26                  //报文头的长度
-#define BUFFSIZE      		1024                //缓冲区的长度
+#define CHANNEL_MAX    		1024
+#define IED_MAX             4
+#define HEADNUMBER    		26
+#define BUFFSIZE      		1024
 //
 #define PACKET_START_FLAG  	0X68
 #define SEND_RPT_START  	0X01
@@ -129,19 +131,18 @@
 #define INTGER_DATA   		0X00
 #define DOUBLE_DATA   		0X01
 
-/**********************************************************************/
 typedef enum tag_AUTHORITY {
-    INDEX_AUTHORITY_ROOT = 0, //顶级权限
-    INDEX_AUTHORITY_ADMIN,    //报文查看，日志跟踪等除了部分删除功能
-    INDEX_AUTHORITY_TEACHER,  //启动考试，学员以及考试相关的增删该查功能
-    INDEX_AUTHORITY_FORBID,   //已经被禁止的账户或者是尚未启用的账户
+    INDEX_AUTHORITY_ROOT = 0,
+    INDEX_AUTHORITY_ADMIN,
+    INDEX_AUTHORITY_TEACHER,
+    INDEX_AUTHORITY_FORBID,
     INDEX_AUTHORITY_MAX_NUM
 } AUTHORITY;
 
-#define STRING_ADMIN_AUTHORITY_ROOT                  QStringLiteral("超级用户")
-#define STRING_ADMIN_AUTHORITY_ADMIN                 QStringLiteral("管理员")
-#define STRING_ADMIN_AUTHORITY_TEACHER               QStringLiteral("教师")
-#define STRING_ADMIN_AUTHORITY_FORBID                QStringLiteral("已禁止")
+#define STRING_ADMIN_AUTHORITY_ROOT                  QStringLiteral("root")
+#define STRING_ADMIN_AUTHORITY_ADMIN                 QStringLiteral("administrator")
+#define STRING_ADMIN_AUTHORITY_TEACHER               QStringLiteral("teacher")
+#define STRING_ADMIN_AUTHORITY_FORBID                QStringLiteral("forbid")
 const QString table_authority[] = {
     STRING_ADMIN_AUTHORITY_ROOT,
     STRING_ADMIN_AUTHORITY_ADMIN,
@@ -149,16 +150,15 @@ const QString table_authority[] = {
     STRING_ADMIN_AUTHORITY_FORBID
 };
 
-/**********************************************************************/
 typedef enum tag_EXAM_STATUS {
     INDEX_EXAM_STATUS_PREPARED = 0,
     INDEX_EXAM_STATUS_STARTING,
     INDEX_EXAM_STATUS_FINISED,
     INDEX_EXAM_STATUS_MAX_NUM
 } EXAM_STATUS;
-#define STRING_EXAM_STATUS_PREPARED                  QStringLiteral("未开始")
-#define STRING_EXAM_STATUS_STARTING                  QStringLiteral("已开始")
-#define STRING_EXAM_STATUS_FINISED                   QStringLiteral("已结束")
+#define STRING_EXAM_STATUS_PREPARED                  QStringLiteral("PREPARED")
+#define STRING_EXAM_STATUS_STARTING                  QStringLiteral("STARTING")
+#define STRING_EXAM_STATUS_FINISED                   QStringLiteral("FINISED")
 
 const QString table_exam_status[] = {
     STRING_EXAM_STATUS_PREPARED,
@@ -166,35 +166,32 @@ const QString table_exam_status[] = {
     STRING_EXAM_STATUS_FINISED
 };
 
-/**********************************************************************/
 typedef enum tag_EXAMINATION {
     INDEX_EXAMINATION_ID = 0,//ID
-    INDEX_EXAMINATION_DATE,  //考试日期
-    INDEX_EXAMINATION_STATUS,//考试状态
-    INDEX_EXAMINATION_NAME,  //考试名称
+    INDEX_EXAMINATION_DATE,
+    INDEX_EXAMINATION_STATUS,
+    INDEX_EXAMINATION_NAME,
     INDEX_EXAMINATION_MAX_NUM
 } EXAMINATION;
-#define STRING_EXAMINATION_ID                  QStringLiteral("考试号")
-#define STRING_EXAMINATION_DATE                QStringLiteral("考试日期")
-#define STRING_EXAMINATION_STATUS              QStringLiteral("考试状态")
-#define STRING_EXAMINATION_NAME                QStringLiteral("考试名称")
+#define STRING_EXAMINATION_ID                  QStringLiteral("ID")
+#define STRING_EXAMINATION_DATE                QStringLiteral("DATE")
+#define STRING_EXAMINATION_STATUS              QStringLiteral("STATUS")
+#define STRING_EXAMINATION_NAME                QStringLiteral("NAME")
 
-/**********************************************************************/
 typedef enum tag_COMMUNICATION {
-    INDEX_COMMUNICATION_ID = 0,     //ID
-    INDEX_COMMUNICATION_NAME,       //通信名称
-    INDEX_COMMUNICATION_DATETIME,   //通信时间
-    INDEX_COMMUNICATION_DIRECTION,  //通信方向
-    INDEX_COMMUNICATION_CONTENT,    //通信方向
+    INDEX_COMMUNICATION_ID = 0,
+    INDEX_COMMUNICATION_NAME,
+    INDEX_COMMUNICATION_DATETIME,
+    INDEX_COMMUNICATION_DIRECTION,
+    INDEX_COMMUNICATION_CONTENT,
     INDEX_COMMUNICATION_MAX_NUM
 } COMMUNICATION;
-#define STRING_COMMUNICATION_ID                  QStringLiteral("序号")
-#define STRING_COMMUNICATION_NAME                QStringLiteral("通道名")
-#define STRING_COMMUNICATION_DATETIME            QStringLiteral("通信时间")
-#define STRING_COMMUNICATION_DIRECTION           QStringLiteral("通信方向")
-#define STRING_COMMUNICATION_CONTENT             QStringLiteral("通信内容")
+#define STRING_COMMUNICATION_ID                  QStringLiteral("ID")
+#define STRING_COMMUNICATION_NAME                QStringLiteral("NAME")
+#define STRING_COMMUNICATION_DATETIME            QStringLiteral("DATETIME")
+#define STRING_COMMUNICATION_DIRECTION           QStringLiteral("DIRECTION")
+#define STRING_COMMUNICATION_CONTENT             QStringLiteral("CONTENT")
 
-/**********************************************************************/
 typedef enum tag_PACKET_DIRECTION {
     PACKET_SEND = 0,
     PACKET_RECV,
@@ -212,22 +209,15 @@ typedef enum tag_LINKINFO {
     LINKINFO_MAX_NUM
 } LINKINFO;
 
-
-///////////////////////////////////////////////////
-/*
- *  定义串口通信特性
- */
 typedef struct tag_COMPORT_INFO {
-    QString portName;/* 串口名 */
-    QString baudRate; /* 波特率 */
-    QString dataBit; /* 数据位 */
-    QString stopBit; /* 停止位 */
-    QString parity; /* 校验：2:none;1:odd;0:even */
+    QString portName;
+    QString baudRate;
+    QString dataBit;
+    QString stopBit;
+    QString parity; /*2:none;1:odd;0:even */
 } COMPORT_INFO;
 
-/*
- *  定义网络通信特性
- */
+
 typedef struct tag_TCPPORT_INFO {
     QString localIP;
     QString remoteIP;

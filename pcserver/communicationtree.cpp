@@ -56,7 +56,7 @@ void CommunicationTree::insertItems(const QString &text, int linkIndex) {
     insertTransmitItems(text, linkIndex);
 }
 
-void CommunicationTree::insertItems(const int socketDescriptor, const QString & ip, const quint16 port, int linkIndex) {
+void CommunicationTree::insertItems(const int socketDescriptor, const QString & ip, const quint16 /*port*/, int linkIndex) {
     //    QList<QStandardItem*> list;
     //    list.append(new QStandardItem(QString(socketDescriptor)));
     //    list.append(new QStandardItem(ip));
@@ -100,7 +100,7 @@ void CommunicationTree::removeItems(const QString &text) {
     });
 }
 
-void CommunicationTree::removeTransmitItems(const QString &text, int linkIndex) {
+void CommunicationTree::removeTransmitItems(const QString &, int) {
 
 }
 
@@ -161,7 +161,7 @@ void CommunicationTree::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-void CommunicationTree::onTreeCustomContextMenuRequested(QPoint pos) {
+void CommunicationTree::onTreeCustomContextMenuRequested(QPoint) {
     treePopMenu->addAction(callAction);
 
     treePopMenu->exec(QCursor::pos());

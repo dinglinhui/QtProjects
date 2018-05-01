@@ -7,11 +7,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QMessageBox>
-
-#include "dbmysql.h"
 #include "mainwindow.h"
-
-extern DbMySQL db;
 
 LoginDialog::LoginDialog(QWidget* parent) :
     QDialog(parent) {
@@ -21,8 +17,8 @@ LoginDialog::LoginDialog(QWidget* parent) :
     showLabel->setPixmap(QPixmap::fromImage(image));
     QPalette pe;
     pe.setColor(QPalette::WindowText,Qt::blue);
-    QLabel* usrLabel = new QLabel(tr("  帐  号:"));
-    QLabel* pwdLabel = new QLabel(tr("  密  码:"));
+    QLabel* usrLabel = new QLabel(tr("Account:"));
+    QLabel* pwdLabel = new QLabel(tr("Password:"));
     usrLabel->setPalette(pe);
     pwdLabel->setPalette(pe);
     usrLineEdit = new QLineEdit;
@@ -49,7 +45,7 @@ LoginDialog::LoginDialog(QWidget* parent) :
     dlgLayout->addWidget(buttonBox);
     this->setLayout(dlgLayout);
     this->setFixedSize(300,200);
-    this->setWindowTitle(tr("登录PCServer"));
+    this->setWindowTitle(tr("Login PCServer"));
 }
 
 LoginDialog::~LoginDialog() {
@@ -58,19 +54,21 @@ LoginDialog::~LoginDialog() {
 }
 
 void LoginDialog::accept() {
-    // 从数据库获取设置信息
-    QString newPasswd(pwdLineEdit->text().toLocal8Bit().toBase64());
-    if (db.getAdminInfo(usrLineEdit->text().trimmed(), newPasswd)) {
+//    QString newPasswd(pwdLineEdit->text().toLocal8Bit().toBase64());
+//    if (db.getAdminInfo(usrLineEdit->text().trimmed(), newPasswd)) {
 
-        MainWindow *mainwindow = new MainWindow;
-        mainwindow->show();
+//        MainWindow *mainwindow = new MainWindow;
+//        mainwindow->show();
 
-        QDialog::accept();
-        this->close();
-    } else {
-        QMessageBox::warning(this, tr("警告"), tr("用户或密码错误！"), QMessageBox::Yes);
-        usrLineEdit->setFocus();
-    }
+//        QDialog::accept();
+//        this->close();
+//    } else {
+//        QMessageBox::warning(this, tr("Warning"), tr("Username or Password incorrect!"), QMessageBox::Yes);
+//        usrLineEdit->setFocus();
+//    }
+
+    MainWindow *mainwindow = new MainWindow;
+    mainwindow->show();
 }
 
 void LoginDialog::paintEvent(QPaintEvent *)

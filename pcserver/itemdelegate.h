@@ -15,8 +15,8 @@ public:
         QItemDelegate(parent) {
     }
 
-    QWidget *createEditor(QWidget*parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const {
+    QWidget *createEditor(QWidget*, const QStyleOptionViewItem &,
+                          const QModelIndex &) const {
         return NULL;
     }
 };
@@ -28,8 +28,8 @@ public:
         QItemDelegate(parent) {
     }
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const {
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &,
+                          const QModelIndex &) const {
         QLineEdit *editor = new QLineEdit(parent);
         QRegExp regExp("[0-9]{0,10}");
         editor->setValidator(new QRegExpValidator(regExp, parent));
@@ -50,7 +50,7 @@ public:
     }
 
     void updateEditorGeometry(QWidget *editor,
-                              const QStyleOptionViewItem &option, const QModelIndex &index) const {
+                              const QStyleOptionViewItem &option, const QModelIndex &) const {
         editor->setGeometry(option.rect);
     }
 };
@@ -62,8 +62,8 @@ public:
         QItemDelegate(parent) {
     }
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const {
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &,
+                          const QModelIndex &) const {
         QLineEdit *editor = new QLineEdit(parent);
         //		QRegExp regExp("^[0-9]+(.[0-9]{1,4})?$");
         QRegExp regExp("^(-?\\d+)(\\.\\d+)?$");
@@ -85,7 +85,7 @@ public:
     }
 
     void updateEditorGeometry(QWidget *editor,
-                              const QStyleOptionViewItem &option, const QModelIndex &index) const {
+                              const QStyleOptionViewItem &option, const QModelIndex &) const {
         editor->setGeometry(option.rect);
     }
 };
@@ -97,8 +97,8 @@ public:
         QItemDelegate(parent) {
     }
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const {
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &,
+                          const QModelIndex &) const {
         QSpinBox *editor = new QSpinBox(parent);
         editor->setMinimum(1);
         editor->setMaximum(100);
@@ -120,7 +120,7 @@ public:
     }
 
     void updateEditorGeometry(QWidget *editor,
-                              const QStyleOptionViewItem &option, const QModelIndex &index) const {
+                              const QStyleOptionViewItem &option, const QModelIndex &) const {
         editor->setGeometry(option.rect);
     }
 };
@@ -133,8 +133,8 @@ public:
         QItemDelegate(parent) {
     }
 
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const {
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &,
+                          const QModelIndex &) const {
         QComboBox *editor = new QComboBox(parent);
         editor->addItem("Female");
         editor->addItem("Male");
@@ -156,7 +156,7 @@ public:
     }
 
     void updateEditorGeometry(QWidget *editor,
-                              const QStyleOptionViewItem &option, const QModelIndex &index) const {
+                              const QStyleOptionViewItem &option, const QModelIndex &) const {
         editor->setGeometry(option.rect);
     }
 };

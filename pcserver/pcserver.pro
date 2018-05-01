@@ -17,7 +17,6 @@ CONFIG   -= app_bundle
 
 SOURCES += \
     borderlayout.cpp \
-    dbmysql.cpp \
     freezetableview.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -35,7 +34,6 @@ SOURCES += \
     configdialog.cpp \
     networkinformation.cpp \
     logindialog.cpp \
-    des.cpp \
     mainwidget.cpp \
     communicationwidget.cpp \
     communicationtable.cpp \
@@ -44,16 +42,11 @@ SOURCES += \
     examinationtree.cpp \
     examinationwidget.cpp \
     sqltablemodel.cpp \
-    graphwidget.cpp \
-    graphtree.cpp \
-    glwidget.cpp \
-    model.cpp \
-    primedialog.cpp \
-    camera.cpp
+    comboboxitem.cpp \
+    nofocusframedelegate.cpp
 
 HEADERS += \
     borderlayout.h \
-    dbmysql.h \
     freezetableview.h \
     itemdelegate.h \
     mainwindow.h \
@@ -72,7 +65,6 @@ HEADERS += \
     configdialog.h \
     networkinformation.h \
     logindialog.h \
-    des.h \
     mainwidget.h \
     communicationwidget.h \
     communicationtable.h \
@@ -81,19 +73,10 @@ HEADERS += \
     examinationtree.h \
     examinationwidget.h \
     sqltablemodel.h \
-    graphwidget.h \
-    graphtree.h \
-    glwidget.h \
-    model/teapot.h \
-    model.h \
-    primedialog.h \
-    camera.h
+    comboboxitem.h \
+    nofocusframedelegate.h
 
 RESOURCES += pcserver.qrc
 
-include($$PWD/3rdparty/qtxlsx/src/xlsx/qtxlsx.pri)
-unix:include($$PWD/3rdparty/eventdispatcher_libev/eventdispatcher_libev.pri)
-
-DISTFILES += \
-    model/mermaid.obj \
-    model/mermaid.mtl
+#include($$PWD/3rdparty/qtxlsx/src/xlsx/qtxlsx.pri)
+#unix:include($$PWD/3rdparty/eventdispatcher_libev/eventdispatcher_libev.pri)

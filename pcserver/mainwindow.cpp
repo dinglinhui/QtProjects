@@ -9,32 +9,31 @@
 #include "mainwindow.h"
 #include "configdialog.h"
 #include "xmlparser.h"
+#include "ComboboxItem.h"
+#include "NoFocusFrameDelegate.h"
 
 extern SessionInfo sessionInfo;
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      tcpServer(new TcpServer()),
-      db(new DbMySQL()),
-      m_pWidget(new TabWidget(this)),
-      m_pAnalyzeDock(new AnalyzeDock(COMMPKT_PACKET_ANALYZE, this)),
-      m_pLogDock(new LogDock(COMMPKT_SYSTEM_LOG, this)),
-      m_pServiceMenu(this->menuBar()->addMenu(MENU_SERVICE)),
-      m_pFunctionMenu(this->menuBar()->addMenu(MENU_FUNCTION)),
-      m_pInterfaceMenu(this->menuBar()->addMenu(MENU_INTERFACE)),
-      m_pHelpMenu(this->menuBar()->addMenu(MENU_HELP)),
-      m_pCfgToolBar(this->addToolBar(tr("Config"))),
-      m_pFunctionToolBar(this->addToolBar(tr("Function"))),
-      m_pSystemToolBar(this->addToolBar(tr("System"))),
-      m_pConfigAct(new QAction(QIcon(":/res/images/256/connect.png"), tr("&Communication Config"), this)),
-      m_pGraphControlAct(new QAction(QIcon(":res/images/256/trojan2.png"), tr("&Graph Control"), this)),
-      m_pExamManageAct(new QAction(QIcon(":/res/images/256/book.png"), tr("&Exam Manage"), this)),
-      m_pCommManageAct(new QAction(QIcon(":/res/images/256/virus.png"), tr("&Communication Manage"), this)),
-      m_pPrimeTestAct(new QAction(QIcon(":res/images/256/trojan.png"), tr("&Prime Test"), this)),
-      m_pFullScreenAct(new QAction(QIcon(":/res/images/fullscreenIcon.png"), tr("&Full Screen"), this)),
-      m_pQuitAct(new QAction(QIcon(":/res/images/256/close.png"), tr("&Quit System"), this)),
-      m_pAboutAct(new QAction(QIcon(":/res/images/256/info.png"), tr("&About PCServer"), this)),
-      m_bFullScreen(true)
-{
+MainWindow::MainWindow(QWidget *parent) :
+        QMainWindow(parent),
+        tcpServer(new TcpServer()),
+        m_pWidget(new TabWidget(this)),
+        m_pAnalyzeDock(new AnalyzeDock(COMMPKT_PACKET_ANALYZE, this)),
+        m_pLogDock(new LogDock(COMMPKT_SYSTEM_LOG, this)),
+        m_pServiceMenu(this->menuBar()->addMenu(MENU_SERVICE)),
+        m_pFunctionMenu(this->menuBar()->addMenu(MENU_FUNCTION)),
+        m_pInterfaceMenu(this->menuBar()->addMenu(MENU_INTERFACE)),
+        m_pHelpMenu(this->menuBar()->addMenu(MENU_HELP)),
+        m_pCfgToolBar(this->addToolBar(tr("Config"))),
+        m_pFunctionToolBar(this->addToolBar(tr("Function"))),
+        m_pSystemToolBar(this->addToolBar(tr("System"))),
+        m_pViewToolBar(this->addToolBar(tr("View"))),
+        m_pConfigAct(new QAction(QIcon(":/res/images/256/connect.png"), tr("&Communication Config"), this)),
+        m_pExamManageAct(new QAction(QIcon(":/res/images/256/book.png"), tr("&Exam Manage"), this)),
+        m_pCommManageAct(new QAction(QIcon(":/res/images/256/virus.png"), tr("&Communication Manage"), this)),
+        m_pFullScreenAct(new QAction(QIcon(":/res/images/fullscreenIcon.png"), tr("&Full Screen"), this)),
+        m_pQuitAct(new QAction(QIcon(":/res/images/256/close.png"), tr("&Quit System"), this)),
+        m_pAboutAct(new QAction(QIcon(":/res/images/256/info.png"), tr("&About PCServer"), this)),
+        m_bFullScreen(true) {
     if (this->objectName().isEmpty())
         this->setObjectName(QString::fromUtf8("PCServer"));
 
@@ -44,27 +43,23 @@ MainWindow::MainWindow(QWidget *parent)
     this->setUnifiedTitleAndToolBarOnMac(false);
     this->setCentralWidget(m_pWidget);
     this->drawWindows();
-    this->resize(QApplication::desktop()->width(), QApplication::desktop()->height());
-    //    this->resize(QApplication::desktop()->width()/2, QApplication::desktop()->height()/2);
-    //    this->resize(500, 300);
+    this->resize(QApplication::desktop()->width()*2/3, QApplication::desktop()->height()*2/3);
     //
-    connect(tcpServer,&TcpServer::connectClient,m_pWidget,&TabWidget::onSocketConnect);
-    connect(tcpServer,&TcpServer::sockDisConnect,m_pWidget,&TabWidget::onSocketDisConnect);
+    connect(tcpServer, &TcpServer::connectClient, m_pWidget, &TabWidget::onSocketConnect);
+    connect(tcpServer, &TcpServer::sockDisConnect, m_pWidget, &TabWidget::onSocketDisConnect);
 
-    db->getSystemInfo(sessionInfo.sessionId.adminId);
-    //    if(tcpServer->isListening())
-    //        tcpServer->close();
-    //    tcpServer->listen(QHostAddress::Any, sessionInfo.systemInfo.serverInfo.listenPort.toUInt());
+    //m_pWidget->addWelcomeTab();
+    //    db->getSystemInfo(sessionInfo.sessionId.adminId);
 }
 
 MainWindow::~MainWindow() {
-    if(nullptr != tcpServer) {
-        if(tcpServer->isListening())
+    if (nullptr != tcpServer) {
+        if (tcpServer->isListening())
             tcpServer->close();
         delete tcpServer, tcpServer = nullptr;
     }
 
-    if(nullptr != m_pWidget)
+    if (nullptr != m_pWidget)
         delete m_pWidget, m_pWidget = nullptr;
 }
 
@@ -78,20 +73,12 @@ void MainWindow::drawWindows() {
     m_pCommManageAct->setText(COMMUNICATION_MANAGE);
     connect(m_pCommManageAct, SIGNAL(triggered()), this, SLOT(onConnManageTab()));
 
-    m_pGraphControlAct->setText(GRAPH_CONTROL);
-    connect(m_pGraphControlAct, SIGNAL(triggered()), this, SLOT(onGraphControlTab()));
-
-    m_pPrimeTestAct->setText(PRIME_TEST);
-    connect(m_pPrimeTestAct, SIGNAL(triggered()), this, SLOT(onPrimeTestDlg()));
-
-    //全屏
     m_pFullScreenAct->setText(FULL_SCREEN);
     connect(m_pFullScreenAct, SIGNAL(triggered()), this, SLOT(onFullScreen()));
 
-    //关于
     m_pAboutAct->setText(PCSERVER_ABOUT);
     connect(m_pAboutAct, SIGNAL(triggered()), this, SLOT(onAbout()));
-    //关闭
+
     m_pQuitAct->setText(PCSERVER_QUIT);
     connect(m_pQuitAct, SIGNAL(triggered()), this, SLOT(close()));
 
@@ -108,8 +95,6 @@ void MainWindow::drawWindows() {
     //
     m_pServiceMenu->addAction(m_pConfigAct);
     m_pServiceMenu->addAction(m_pQuitAct);
-    m_pFunctionMenu->addAction(m_pPrimeTestAct);
-    m_pFunctionMenu->addAction(m_pGraphControlAct);
     m_pFunctionMenu->addAction(m_pCommManageAct);
     m_pFunctionMenu->addAction(m_pExamManageAct);
     //
@@ -117,42 +102,73 @@ void MainWindow::drawWindows() {
     m_pInterfaceMenu->addAction(m_pLogDock->toggleViewAction());
     m_pHelpMenu->addAction(m_pAboutAct);
 
-    this->menuBar()->setDefaultUp(true);
+    this->menuBar()->setDefaultUp(false);
 
     m_pCfgToolBar->addAction(m_pConfigAct);
-    m_pCfgToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    m_pCfgToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
-    m_pFunctionToolBar->addAction(m_pPrimeTestAct);
-    m_pFunctionToolBar->addAction(m_pGraphControlAct);
     m_pFunctionToolBar->addAction(m_pCommManageAct);
     m_pFunctionToolBar->addAction(m_pExamManageAct);
-    m_pFunctionToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    //
+    m_pFunctionToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
     m_pSystemToolBar->addAction(m_pLogDock->toggleViewAction());
-    m_pSystemToolBar->addAction(m_pFullScreenAct);
     m_pSystemToolBar->addAction(m_pAboutAct);
     m_pSystemToolBar->addAction(m_pQuitAct);
-    m_pSystemToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    m_pSystemToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+
+    QWidget* spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_pViewToolBar->addWidget(spacer);
+
+    m_pViewToolBar->addAction(m_pFullScreenAct);
+    m_pViewToolBar->addSeparator();
+
+    QLabel* label = new QLabel("Layout:");
+    m_pViewToolBar->addWidget(label);
+
+    QComboBox *comboBox = new QComboBox(m_pViewToolBar);
+    comboBox->setMinimumWidth(150);
+    comboBox->addItem("defaule");
+    comboBox->addItem("classic");
+    comboBox->addItem("expert");
+    comboBox->insertSeparator(3);
+    comboBox->addItem("Save");
+    comboBox->addItem("Load");
+
+//    QListWidget* m_listWidget = new QListWidget(this);
+//    m_listWidget->setItemDelegate(new NoFocusFrameDelegate(this));
+//    comboBox->setEditable(false);
+//    comboBox->setModel(m_listWidget->model());
+//    comboBox->setView(m_listWidget);
+//    comboBox->setCurrentIndex(0);
+
+//    for (int i = 0; i < 5; ++i)
+//    {
+//        ComboboxItem* item = new ComboboxItem(comboBox);
+//        item->setLabelContent(QString("Account") + QString::number(i, 10));
+//        //connect(item, SIGNAL(chooseAccount(const QString&)), this, SLOT(onChooseAccount(const QString&)));
+//        QListWidgetItem* widgetItem = new QListWidgetItem(m_listWidget);
+//        m_listWidget->setItemWidget(widgetItem, item);
+//    }
+
+
+    QWidgetAction *checkableAction = new QWidgetAction(m_pViewToolBar);
+    checkableAction->setDefaultWidget(comboBox);
+    m_pViewToolBar->addAction(checkableAction);
+    m_pViewToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    //
 
     QString dateTime = QDateTime::currentDateTimeUtc().toString();
     QString lastLoginTime = sessionInfo.sessionId.adminLoginDate;
-    if(lastLoginTime == "")
+    if (lastLoginTime == "")
         lastLoginTime = dateTime;
 
     sessionInfo.sessionId.adminLoginDate = dateTime;
-    db->updateAdminInfo();
+//    db->updateAdminInfo();
 
-    this->statusBar()->showMessage(QString(PCSERVER_ADMIN)
-                                   .append(sessionInfo.sessionId.adminName)
-                                   .append("(")
-                                   .append(table_authority[sessionInfo.sessionId.adminLevel])
-            .append(")  ")
-            .append(ADMIN_LOGIN_DATE)
-            .append(dateTime)
-            .append("  ")
-            .append(ADMIN_LAST_LOGIN_DATE)
-            .append(lastLoginTime)
-            );
+    this->statusBar()->showMessage(
+            QString(PCSERVER_ADMIN).append(sessionInfo.sessionId.adminName).append("(").append(table_authority[sessionInfo.sessionId.adminLevel]).append(")  ").append(ADMIN_LOGIN_DATE).append(
+                    dateTime).append("  ").append(ADMIN_LAST_LOGIN_DATE).append(lastLoginTime));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -173,13 +189,13 @@ void MainWindow::appendLog(const QString context) {
     m_pLogDock->appendLog(context);
 }
 
-void MainWindow::onFullScreen( void ) {
-    if ( m_bFullScreen ) {
-        menuBar( )->hide( );
-        showFullScreen( );
+void MainWindow::onFullScreen(void) {
+    if (m_bFullScreen) {
+        //menuBar()->hide();
+        showFullScreen();
     } else {
-        menuBar( )->show( );
-        showNormal( );
+        //menuBar()->show();
+        showNormal();
     }
     m_bFullScreen = !m_bFullScreen;
 }
@@ -196,21 +212,11 @@ void MainWindow::onConfigDlg() {
         serverInfo.listenPort = ccd->getGeneralTab()->getListenPort();
         ccd->saveConfig(&serverInfo);
 
-        if(tcpServer->isListening())
+        if (tcpServer->isListening())
             tcpServer->close();
         tcpServer->listen(QHostAddress::Any, serverInfo.listenPort.toUInt());
         sessionInfo.systemInfo.serverInfo = serverInfo;
-        db->updateSystemInfo(sessionInfo.sessionId.adminId);
-    }
-
-    ccd->close();
-    delete ccd;
-}
-
-void MainWindow::onPrimeTestDlg() {
-    PrimeDialog* ccd = new PrimeDialog(this);
-    if (ccd->exec() == QDialog::Accepted) {
-
+//        db->updateSystemInfo(sessionInfo.sessionId.adminId);
     }
 
     ccd->close();
@@ -224,10 +230,5 @@ void MainWindow::onExamManageTab() {
 
 void MainWindow::onConnManageTab() {
     m_pWidget->addConnManageTab();
-    this->update();
-}
-
-void MainWindow::onGraphControlTab() {
-    m_pWidget->addGraphTab();
     this->update();
 }

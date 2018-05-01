@@ -47,7 +47,7 @@ QAbstractItemModel *CommunicationTable::createModel(QObject *parent) {
     return model;
 }
 
-void CommunicationTable::onTableCustomContextMenuRequested(QPoint pos) {
+void CommunicationTable::onTableCustomContextMenuRequested(QPoint) {
     tablePopMenu->addAction(printAction);
     tablePopMenu->addSeparator();
     tablePopMenu->addAction(excelAction);

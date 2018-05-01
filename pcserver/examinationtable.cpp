@@ -56,7 +56,7 @@ void ExaminationTable::fillModel(const QList<QStringList> &exams) {
     });
 }
 
-void ExaminationTable::onTableCustomContextMenuRequested(QPoint pos) {
+void ExaminationTable::onTableCustomContextMenuRequested(QPoint) {
     tablePopMenu->addAction(printAction);
     tablePopMenu->addSeparator();
     tablePopMenu->addAction(excelAction);

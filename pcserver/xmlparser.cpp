@@ -142,7 +142,7 @@ bool XmlParser::readXml(void *context, const QString &type) {
     return true;
 }
 
-bool XmlParser::writeXml(void *context, const QString &type) {
+bool XmlParser::writeXml(void *context, const QString &) {
     QFile::remove(PCSERVER_CONFIG_FILE);
     createXml(PCSERVER_CONFIG_FILE, context);
     return true;

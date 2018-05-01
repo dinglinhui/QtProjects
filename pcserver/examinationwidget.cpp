@@ -2,9 +2,6 @@
 
 #include "examinationwidget.h"
 #include "borderlayout.h"
-#include "dbmysql.h"
-
-extern DbMySQL db;
 
 ExaminationWidget::ExaminationWidget(QWidget *parent) :
     QWidget(parent),
@@ -20,12 +17,6 @@ ExaminationWidget::ExaminationWidget(QWidget *parent) :
     BorderLayout *layout = new BorderLayout;
     layout->addWidget(splitter, BorderLayout::Center);
     this->setLayout(layout);
-
-    QList<QStringList> exams;
-    db.getExamInfo(exams);
-    if(exams.count() > 0){
-        examTable->fillModel(exams);
-    }
 }
 
 ExaminationWidget::~ExaminationWidget() {

@@ -70,7 +70,7 @@ void TransPage::setTransPort(const QString& port) {
 
 ReservePage::ReservePage(QWidget *parent) :
     QWidget(parent) {
-    QLabel *descLabel = new QLabel(QStringLiteral("正常使用情况下不需要启用转发表功能！"));
+    QLabel *descLabel = new QLabel(QStringLiteral("Nomally don't need to enable Transmit function!"));
     descLabel->setAlignment(Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(descLabel);
@@ -99,8 +99,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     QTabWidget *tabWidget = new QTabWidget(parent);
     tabWidget->addTab(generalTab, GENERAL_CONFIG);
-    tabWidget->addTab(permissionsTab, SYSTEM_CONFIG);
-    tabWidget->addTab(applicationsTab, APPLICATION_CONFIG);
+//    tabWidget->addTab(permissionsTab, SYSTEM_CONFIG);
+//    tabWidget->addTab(applicationsTab, APPLICATION_CONFIG);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     buttonBox->button(QDialogButtonBox::Ok)->setText(CONFIRM);
@@ -131,5 +131,5 @@ GeneralTab *ConfigDialog::getGeneralTab() {
 }
 
 bool ConfigDialog::saveConfig(void *context, const QString &type) {
-    parser->writeXml(context, type);
+    return parser->writeXml(context, type);
 }

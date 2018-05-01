@@ -4,19 +4,19 @@ PCServer::PCServer() :
     m_pServer(new TcpServer(this)) {
 
     m_pServer->listen(QHostAddress::Any, 16011);
-    connect(m_pServer,&TcpServer::connectClient,this,&PCServer::sockConnect);//连接信号
-    connect(m_pServer,&TcpServer::sockDisConnect,this,&PCServer::sockDisConnect);//断开信号
+    connect(m_pServer,&TcpServer::connectClient,this,&PCServer::sockConnect);
+    connect(m_pServer,&TcpServer::sockDisConnect,this,&PCServer::sockDisConnect);
 }
 
 PCServer::~PCServer() {
 
 }
 
-void PCServer::sockConnect(const int socketDescriptor, const QString & ip,const quint16 port) {
+void PCServer::sockConnect(const int , const QString & ,const quint16 ) {
     //    qDebug() << "socket connect" << socketDescriptor << " " << ip << " " << port << endl;
 }
 
-void PCServer::sockDisConnect(const int socketDescriptor, const QString & ip,const quint16 port) {
+void PCServer::sockDisConnect(const int , const QString & ,const quint16 ) {
     //    qDebug() << "socket disconnect" << socketDescriptor << " " << ip << " " << port << endl;
 }
 

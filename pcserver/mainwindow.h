@@ -7,6 +7,7 @@
 #include <QToolBar>
 #include <QStatusBar>
 #include <QDockWidget>
+#include <QPushButton>
 #include <QMenu>
 #include <QAction>
 #include <QProgressDialog>
@@ -16,8 +17,6 @@
 #include "proxymodel.h"
 #include "analyzedock.h"
 #include "logdock.h"
-#include "dbmysql.h"
-#include "primedialog.h"
 #include "pcdefs.h"
 #include "utils.h"
 
@@ -35,41 +34,33 @@ public:
 
 private slots:
     void onAbout();
-    void onPrimeTestDlg();
     void onFullScreen(void);
     void onConfigDlg();
     void onExamManageTab();
     void onConnManageTab();
-    void onGraphControlTab();
 
 private:
     //TCP Server
     TcpServer *tcpServer = nullptr;
-    //MySQL
-    DbMySQL *db = nullptr;
     //Centre Widget
     TabWidget *m_pWidget = nullptr;
-    //分析Dock
     AnalyzeDock *m_pAnalyzeDock = nullptr;
-    //日志Dock
-    LogDock *m_pLogDock;
+    LogDock *m_pLogDock = nullptr;
 
-    //菜单
     QMenu *m_pServiceMenu;
     QMenu *m_pFunctionMenu;
     QMenu *m_pInterfaceMenu;
     QMenu *m_pHelpMenu;
-    //工具栏
-    QToolBar *m_pCfgToolBar;//配置工具栏
-    QToolBar *m_pFunctionToolBar;//功能工具栏
-    QToolBar *m_pSystemToolBar;//系统工具栏
+
+    QToolBar *m_pCfgToolBar;
+    QToolBar *m_pFunctionToolBar;
+    QToolBar *m_pSystemToolBar;
+    QToolBar *m_pViewToolBar;
 
     //Action
     QAction *m_pConfigAct;
-	QAction *m_pPrimeTestAct;
     QAction *m_pExamManageAct;
     QAction *m_pCommManageAct;
-    QAction *m_pGraphControlAct;
     QAction *m_pFullScreenAct;
     QAction *m_pQuitAct;
     QAction *m_pAboutAct;

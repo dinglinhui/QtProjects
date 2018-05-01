@@ -8,7 +8,6 @@
 #include "pcdefs.h"
 #include "welcomewidget.h"
 #include "mainwidget.h"
-#include "graphwidget.h"
 #include "examinationwidget.h"
 #include "communicationwidget.h"
 
@@ -20,7 +19,8 @@ public:
     ~TabWidget();
 
 public:
-    void addGraphTab();
+//    void addGraphTab();
+    void addWelcomeTab();
     void addConnManageTab();
     void addExamManageTab();
 
@@ -32,7 +32,6 @@ public slots:
 
 private:
     WelcomeWidget *welcomWidget = nullptr;
-    GraphWidget *graphWidget = nullptr;
     ExaminationWidget *examinationWidget = nullptr;
     CommunicationWidget *communicationWidget = nullptr;
 };
